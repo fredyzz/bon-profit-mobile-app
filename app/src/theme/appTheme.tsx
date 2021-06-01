@@ -6,21 +6,31 @@ export const globalStyles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    marginTop:30,
     marginBottom: 10,
+    textAlign: 'center',
   },
   bigButton: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 50,
     backgroundColor: 'blue',
-    borderRadius: 20,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+
     marginTop: 10,
   },
   bigButtonText: {
     color: 'white',
     fontSize: 30,
+  },
+   input: {
+    height: 40,
+    width: '60%',
+    margin: 12,
+    borderRadius: 100,
+    borderWidth: 1,
+    textAlign: 'center'
   },
   avatar: {
     width: 150,

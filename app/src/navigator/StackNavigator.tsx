@@ -28,6 +28,11 @@ export const StackNavigator = () => {
         },
       }}>
       <Stack.Screen
+        name="LoginScreen"
+        options={{title: 'Login'}}
+        component={Page1screen}
+      />
+      <Stack.Screen
         name="Page1screen"
         options={{title: 'Page 1'}}
         component={Page1screen}

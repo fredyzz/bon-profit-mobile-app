@@ -13,6 +13,7 @@ import {
   Text,
 } from 'react-native';
 import {StackNavigator} from './StackNavigator';
+import {LoginScreen} from '../screens/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -26,15 +27,21 @@ export const DrawerNavigator = () => {
       drawerType={width >= 768 ? 'slide' : 'front'}
       drawerContent={props => <DrawerContent {...props} />}>
       <Drawer.Screen
-        name="StackNavigator"
-        options={{title: 'Home'}}
-        component={StackNavigator}
+        name="LoginScreen"
+        options={{title: 'Login'}}
+        component={LoginScreen}
       />
       <Drawer.Screen
         name="SettingsScreen"
         options={{title: 'Settings'}}
         component={SettingsScreen}
       />
+      <Drawer.Screen
+        name="StackNavigator"
+        options={{title: 'Home'}}
+        component={StackNavigator}
+      />
+      
     </Drawer.Navigator>
   );
 };
@@ -42,6 +49,7 @@ export const DrawerNavigator = () => {
 const DrawerContent = ({
   navigation,
 }: DrawerContentComponentProps<DrawerContentOptions>) => {
+
   return (
     <DrawerContentScrollView>
       <View>
