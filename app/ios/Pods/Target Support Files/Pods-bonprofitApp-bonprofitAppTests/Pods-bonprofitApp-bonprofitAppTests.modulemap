@@ -1,0 +1,6 @@
+module Pods_bonprofitApp_bonprofitAppTests {
+  umbrella header "Pods-bonprofitApp-bonprofitAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
