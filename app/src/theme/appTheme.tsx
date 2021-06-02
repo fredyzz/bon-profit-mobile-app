@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {Colors}  from './colors'
 
 export const globalStyles = StyleSheet.create({
   globalMargin: {
@@ -9,6 +10,7 @@ export const globalStyles = StyleSheet.create({
     marginTop:30,
     marginBottom: 10,
     textAlign: 'center',
+    color: Colors.primary
   },
   bigButton: {
     width: 200,
@@ -24,13 +26,23 @@ export const globalStyles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
   },
+  textButtonContainer: {
+    width: 180,
+    marginTop:30,
+  },
+  textButton:{
+    textAlign: 'center',
+    color: Colors.dark,
+  },
    input: {
     height: 40,
     width: '60%',
     margin: 12,
     borderRadius: 100,
     borderWidth: 1,
-    textAlign: 'center'
+    borderColor: Colors.primary,
+    textAlign: 'center',
+    color: Colors.dark
   },
   avatar: {
     width: 150,

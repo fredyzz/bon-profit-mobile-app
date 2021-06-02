@@ -2,7 +2,7 @@ import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../store/context/AuthContext'
-import {Button, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
+import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
 import {login} from '../services/auth/login'
@@ -42,7 +42,11 @@ export const LoginScreen = ({navigation}: Props) => {
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-      <Text style={[globalStyles.title, globalStyles.center]}>Login</Text>
+     <Image
+          style={styles.logo}
+          source={require('../images/BonProfit-color.png')}
+        />
+      <Text style={[globalStyles.title, globalStyles.center]}>Bon Profit</Text>
       <View style={styles.inputContainer}>
          <TextInput
         style={globalStyles.input}
@@ -52,16 +56,24 @@ export const LoginScreen = ({navigation}: Props) => {
       />
       <TextInput
         style={globalStyles.input}
-         placeholder='password'
+        secureTextEntry={true}
+        placeholder='password'
         onChangeText={(value) => setPasswordInput(value)}
         value={passwordInput}
       />
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          style={[globalStyles.bigButton, styles.btnBgRed]}
+          style={[globalStyles.bigButton, styles.btnLogin]}
           onPress={handleLogin}>
           <Text style={globalStyles.bigButtonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.btnContainer}>
+        <TouchableOpacity
+          style={[globalStyles.textButtonContainer]}
+          onPress={() => navigation.navigate('RegisterScreen')}>
+          <Text style={globalStyles.textButton}>¿Not registered yet? Click here to register</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -70,7 +82,13 @@ export const LoginScreen = ({navigation}: Props) => {
 
 const styles = StyleSheet.create({
   container: {flex: 1,
+  justifyContent: 'center',
   alignItems: 'center'},
+  logo: {
+      width: 200,
+      height: 200,
+       resizeMode: 'contain',
+  },
   btnContainer: {
       width:'100%',
       flexDirection: 'row',
@@ -80,7 +98,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       flexDirection:'column',
   },
-  btnBgRed: {backgroundColor: 'red'},
+  btnLogin: {backgroundColor: Colors.primary},
   btnMenu: {
     marginLeft: 20,
   },

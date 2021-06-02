@@ -15,6 +15,7 @@ import {
 import {StackNavigator} from './StackNavigator';
 import {LoginScreen} from '../screens/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
+import {RegisterScreen} from '../screens/RegisterScreen'
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -30,6 +31,11 @@ export const DrawerNavigator = () => {
         name="LoginScreen"
         options={{title: 'Login'}}
         component={LoginScreen}
+      />
+      <Drawer.Screen
+        name="RegisterScreen"
+        options={{title: 'Register'}}
+        component={RegisterScreen}
       />
       <Drawer.Screen
         name="SettingsScreen"
