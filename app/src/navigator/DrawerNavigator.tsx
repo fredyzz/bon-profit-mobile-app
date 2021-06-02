@@ -13,9 +13,9 @@ import {
   Text,
 } from 'react-native';
 import {StackNavigator} from './StackNavigator';
-import {LoginScreen} from '../screens/LoginScreen';
+import {LoginScreen} from '../screens/auth/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
-import {RegisterScreen} from '../screens/RegisterScreen'
+import {RegisterScreen} from '../screens/auth/RegisterScreen'
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 

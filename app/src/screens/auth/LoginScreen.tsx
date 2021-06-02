@@ -1,12 +1,12 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
-import {AuthContext} from '../store/context/AuthContext'
+import {AuthContext} from '../../store/context/AuthContext'
 import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
-import {globalStyles} from '../theme/appTheme';
-import {Colors} from '../theme/colors';
-import {login} from '../services/auth/login'
-import {validateLoginForm} from '../helpers/login'
+import {globalStyles} from '../../theme/appTheme';
+import {Colors} from '../../theme/colors';
+import {login} from '../../services/auth/login'
+import {validateLoginForm} from '../../helpers/login'
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
@@ -60,7 +60,7 @@ export const LoginScreen = ({navigation}: Props) => {
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
      <Image
           style={styles.logo}
-          source={require('../images/BonProfit-color.png')}
+          source={require('../../images/BonProfit-color.png')}
         />
       <Text style={[globalStyles.title, globalStyles.center]}>Bon Profit</Text>
       <View style={styles.inputContainer}>
