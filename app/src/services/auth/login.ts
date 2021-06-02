@@ -23,6 +23,8 @@ export async function login(email: String, password: String) : {} {
             const {data: {user}} = await axios.get(USER_URL,config)
 
             return {
+            success: true,
+            message: 'Logged succesfully',
             token,
             refreshToken,
             user: {
@@ -37,7 +39,10 @@ export async function login(email: String, password: String) : {} {
 
 
     } catch (error) {
-       throw new Error(error.message);
+       return {
+           success: false,
+           message: 'Wrong credentials'
+       }
     }
 
 }

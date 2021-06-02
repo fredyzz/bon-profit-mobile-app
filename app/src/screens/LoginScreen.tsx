@@ -2,10 +2,11 @@ import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../store/context/AuthContext'
-import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
+import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
 import {login} from '../services/auth/login'
+import {validateLoginForm} from '../helpers/login'
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
@@ -35,9 +36,24 @@ export const LoginScreen = ({navigation}: Props) => {
   }, [authState])
 
     const handleLogin = async () => {
-        const loginResult = await login(emailInput, passwordInput)
-        signIn(loginResult)
-    }
+        const {isValid, message} = validateLoginForm({email: emailInput, password: passwordInput})
+        if(!isValid) {
+           Alert.alert(
+                "Something went wrong",
+                message
+            )
+          } else {
+            const {success, message, ...loginResult} = await login(emailInput, passwordInput)
+            console.log(success)
+           if(success) signIn(loginResult)
+           if(!success) {
+             Alert.alert(
+                "Something went wrong",
+                message
+            )
+           }
+          }
+        }
 
 
   return (
