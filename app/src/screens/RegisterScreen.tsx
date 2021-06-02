@@ -2,47 +2,65 @@ import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../store/context/AuthContext'
-import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
+import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
-import {login} from '../services/auth/login'
+import {login} from '../services/auth/login';
+import {validateRegisterForm} from '../helpers/register';
+import {register} from '../services/auth/register';
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 export const RegisterScreen = ({navigation}: Props) => {
-    const [nameInput, setNameInput] = useState('')
-    const [lastNameInput, setLastNameInput] = useState('')
-    const [phoneInput, setPhoneInput] = useState('')
-    const [emailInput, setEmailInput] = useState('')
-    const [passwordInput, setPasswordInput] = useState('')
-    const [repeatPasswordInput, setRepeatPasswordInput] = useState('')
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordRepeat, setPasswordRepeat] = useState('')
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        // <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
-        <TouchableOpacity
-          style={styles.btnMenu}
-          onPress={() => navigation.toggleDrawer()}>
-          <Text>Menu</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
+    const [registerButttonDisabled, setRegisterButttonDisabled] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const {authState, signIn} = useContext(AuthContext);
+
+
+
 
   useEffect( () => {
     if(!authState.isLoggedIn) {console.log('No esta logeado')}
     else {navigation.navigate('StackNavigator')}
-
   }, [authState])
 
-    const handleLogin = async () => {
-        const loginResult = await login(emailInput, passwordInput)
-        signIn(loginResult)
-    }
+  useEffect( () => {
+      if(name, lastName, phone, email, password, passwordRepeat) {
+          setRegisterButttonDisabled(false)
+          } else {
+            setRegisterButttonDisabled(true)
+          }
+  }, [name, lastName, phone, email, password, passwordRepeat])
 
+    const handleRegister = async () => {
+        const {isValid, message} = validateRegisterForm({
+            name, lastName, phone, email, password, passwordRepeat
+        })
+        if(!isValid) {
+            Alert.alert(
+                "Something went wrong",
+                message
+            )
+         } else {
+             const {success, message} = await register({
+                 name, lastname: lastName, phone, email, password
+             })
+             if(success) {navigation.navigate('LoginScreen')} else {
+                 Alert.alert(
+                "Something went wrong",
+                message
+            )
+             }
+         }
+    }
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
@@ -55,46 +73,47 @@ export const RegisterScreen = ({navigation}: Props) => {
          <TextInput
             style={globalStyles.input}
             placeholder='name'
-            onChangeText={(value) => setNameInput(value)}
-            value={nameInput}
+            onChangeText={(value) => setName(value)}
+            value={name}
         />
         <TextInput
             style={globalStyles.input}
             placeholder='lastname'
-            onChangeText={(value) => setLastNameInput(value)}
-            value={lastNameInput}
+            onChangeText={(value) => setLastName(value)}
+            value={lastName}
         />
         <TextInput
             style={globalStyles.input}
             placeholder='phone'
-            onChangeText={(value) => setPhoneInput(value)}
-            value={phoneInput}
+            onChangeText={(value) => setPhone(value)}
+            value={phone}
         />
         <TextInput
             style={globalStyles.input}
             placeholder='email'
-            onChangeText={(value) => setEmailInput(value)}
-            value={emailInput}
+            onChangeText={(value) => setEmail(value)}
+            value={email}
         />
         <TextInput
             style={globalStyles.input}
             secureTextEntry={true}
             placeholder='password'
-            onChangeText={(value) => setPasswordInput(value)}
-            value={passwordInput}
+            onChangeText={(value) => setPassword(value)}
+            value={password}
         />
         <TextInput
             style={globalStyles.input}
             secureTextEntry={true}
             placeholder='repeat password'
-            onChangeText={(value) => setRepeatPasswordInput(value)}
-            value={repeatPasswordInput}
+            onChangeText={(value) => setPasswordRepeat(value)}
+            value={passwordRepeat}
         />
         </View>
         <View style={styles.btnContainer}>
             <TouchableOpacity
-                style={[globalStyles.bigButton, styles.btnLogin]}
-                onPress={handleLogin}>
+                disabled={registerButttonDisabled}
+                style={[globalStyles.bigButton, styles.btnLogin, registerButttonDisabled && globalStyles.buttonDisabled]}
+                onPress={handleRegister}>
                 <Text style={globalStyles.bigButtonText}>Register</Text>
             </TouchableOpacity>
         </View>

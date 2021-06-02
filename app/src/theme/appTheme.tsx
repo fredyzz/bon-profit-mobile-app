@@ -59,4 +59,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 40,
     fontSize: 20,
   },
+  buttonDisabled: {
+    backgroundColor: Colors.disabled,
+  }
 });

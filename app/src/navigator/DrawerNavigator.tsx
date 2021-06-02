@@ -19,7 +19,9 @@ import {RegisterScreen} from '../screens/RegisterScreen'
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator(
+
+);
 
 export const DrawerNavigator = () => {
   const {width} = useWindowDimensions();
