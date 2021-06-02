@@ -10,14 +10,13 @@ import {validateLoginForm} from '../../helpers/login'
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
-export const LoginScreen = ({navigation}: Props) => {
+export const SuccessScreen = ({navigation}: Props) => {
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        // <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <TouchableOpacity
           style={styles.btnMenu}
           onPress={() => navigation.toggleDrawer()}>
@@ -31,65 +30,23 @@ export const LoginScreen = ({navigation}: Props) => {
 
   useEffect( () => {
     if(!authState.isLoggedIn) {console.log('No esta logeado')}
-    else {navigation.navigate('SuccessScreen')}
+    else {navigation.navigate('StackNavigator')}
 
   }, [authState])
-
-    const handleLogin = async () => {
-        const {isValid, message} = validateLoginForm({email: emailInput, password: passwordInput})
-        if(!isValid) {
-           Alert.alert(
-                "Something went wrong",
-                message
-            )
-          } else {
-            const {success, message, ...loginResult} = await login(emailInput, passwordInput)
-            console.log(success)
-           if(success) signIn(loginResult)
-           if(!success) {
-             Alert.alert(
-                "Something went wrong",
-                message
-            )
-           }
-          }
-        }
 
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
      <Image
           style={styles.logo}
-          source={require('../../images/BonProfit-color.png')}
+          source={require('../../images/success.gif')}
         />
-      <Text style={[globalStyles.title, globalStyles.center]}>Bon Profit</Text>
-      <View style={styles.inputContainer}>
-         <TextInput
-        style={globalStyles.input}
-        placeholder='email'
-        onChangeText={(value) => setEmailInput(value)}
-        value={emailInput}
-      />
-      <TextInput
-        style={globalStyles.input}
-        secureTextEntry={true}
-        placeholder='password'
-        onChangeText={(value) => setPasswordInput(value)}
-        value={passwordInput}
-      />
-      </View>
+      <Text style={[globalStyles.title, globalStyles.center]}>¡You made it!</Text>
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={[globalStyles.bigButton, styles.btnLogin]}
-          onPress={handleLogin}>
-          <Text style={globalStyles.bigButtonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={[globalStyles.textButtonContainer]}
-          onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={globalStyles.textButton}>¿Not registered yet? Click here to register</Text>
+          onPress={() => navigation.navigate('LoginScreen')}>
+          <Text style={globalStyles.bigButtonText}>Go to login</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

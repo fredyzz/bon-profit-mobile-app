@@ -16,6 +16,7 @@ import {StackNavigator} from './StackNavigator';
 import {LoginScreen} from '../screens/auth/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {RegisterScreen} from '../screens/auth/RegisterScreen'
+import {SuccessScreen} from '../screens/common/SuccessScreen'
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -38,6 +39,11 @@ export const DrawerNavigator = () => {
         name="RegisterScreen"
         options={{title: 'Register'}}
         component={RegisterScreen}
+      />
+      <Drawer.Screen
+        name="SuccessScreen"
+        options={{title: 'Success'}}
+        component={SuccessScreen}
       />
       <Drawer.Screen
         name="SettingsScreen"

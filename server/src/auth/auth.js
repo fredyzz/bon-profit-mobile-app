@@ -18,11 +18,11 @@ passport.use(
       try {
         const user = await UserModel.findOne({ email });
 
-        if (user) {
+        if (user !== null) {
           return done(null, false, { message: 'Email already taken' });
         }
 
-        if (!user) {
+        if (user === null) {
           const newUser = await UserModel.create({
             email: email.toLowerCase(),
             password: md5(password),

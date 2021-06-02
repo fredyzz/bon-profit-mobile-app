@@ -12,9 +12,9 @@ export async function register(registerFormData : RegisterFormData ) : {} {
             SIGN_UP_URL,
             registerFormData
         )
-
+        
         return {
-            success: true
+            success: true,
         }
 
 

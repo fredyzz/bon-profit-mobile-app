@@ -53,7 +53,7 @@ export const RegisterScreen = ({navigation}: Props) => {
              const {success, message} = await register({
                  name, lastname: lastName, phone, email, password
              })
-             if(success) {navigation.navigate('LoginScreen')} else {
+             if(success) {navigation.navigate('SuccessScreen')} else {
                  Alert.alert(
                 "Something went wrong",
                 message
@@ -91,7 +91,7 @@ export const RegisterScreen = ({navigation}: Props) => {
         <TextInput
             style={globalStyles.input}
             placeholder='email'
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={(value) => setEmail(value.toLowerCase())}
             value={email}
         />
         <TextInput
