@@ -4,7 +4,6 @@ import React, {useEffect, useContext} from 'react';
 import {AuthContext} from '../store/context/AuthContext';
 import {Button, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
-import {Colors} from '../theme/colors';
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}

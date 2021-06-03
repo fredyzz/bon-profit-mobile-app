@@ -13,10 +13,10 @@ import {Colors} from '../theme/colors';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export const ScanScreen = () => {
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
 
-  const onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
+  const onSuccess = (event: {data: string}) => {
+    Linking.openURL(event.data).catch(err =>
       console.error('An error occured', err),
     );
   };

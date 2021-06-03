@@ -114,7 +114,6 @@
 				F912DE8DF62EC91A076D767A /* Pods-bonprofitApp-bonprofitAppTests.debug.xcconfig */,
 				C961B01B059F20EB04FE639E /* Pods-bonprofitApp-bonprofitAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6H2FE7TUQ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bonprofitApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6H2FE7TUQ;
 				INFOPLIST_FILE = bonprofitApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
