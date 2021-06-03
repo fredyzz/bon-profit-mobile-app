@@ -1,19 +1,8 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import {createContext} from 'react';
-
-//Context interface
-export interface AuthState {
-  isLoggedIn?: boolean;
-  token: string;
-  refreshToken: string;
-  user: {
-    name: string;
-    lastname: string;
-  };
-  avatarUrl?: string;
-}
-
-//InitialState
+import {AuthState} from './interfaces';
+import {AuthContextProps} from './interfaces';
+import {authReducer} from './reducer';
 export const authInitialState: AuthState = {
   isLoggedIn: false,
   token: '',
@@ -24,22 +13,20 @@ export const authInitialState: AuthState = {
   },
 };
 
-//Interface to know context form
-export interface AuthContextProps {
-  authState: AuthState;
-  signIn: (updatedState: any) => void;
-}
-
 //Create Context
 export const AuthContext = createContext({} as AuthContextProps);
 
 //State provider component
 export const AuthProvider = ({children}: {children: JSX.Element}) => {
-  //AuthContext states
-  const [authState, setAuthState] = useState(authInitialState);
-  function signIn(updatedState: any): void {
-    setAuthState({...updatedState, isLoggedIn: true});
-  }
+  const [authState, dispatch] = useReducer(authReducer, authInitialState);
+
+  const signIn = (updatedState: any) => {
+    dispatch({
+      type: 'login',
+      data: updatedState,
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
