@@ -37,6 +37,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = bonprofitApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = bonprofitApp/main.m; sourceTree = "<group>"; };
 		1C5E0F3A7F113238E22ED5FC /* Pods-bonprofitApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bonprofitApp.debug.xcconfig"; path = "Target Support Files/Pods-bonprofitApp/Pods-bonprofitApp.debug.xcconfig"; sourceTree = "<group>"; };
+		438299F22669704800F04048 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = bonprofitApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04C0CE562569F842303376C /* libPods-bonprofitApp-bonprofitAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bonprofitApp-bonprofitAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D35746740E35747BECCEE8 /* libPods-bonprofitApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bonprofitApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +107,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		438299F12669701800F04048 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				438299F22669704800F04048 /* Ionicons.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		69E15D105F543C89CE822324 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +136,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				438299F12669701800F04048 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* bonprofitApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* bonprofitAppTests */,

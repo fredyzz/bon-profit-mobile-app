@@ -50,6 +50,14 @@ export const globalStyles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
   },
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 30,
+    marginLeft: 2,
+    color: Colors.dark,
+  },
   drawerMenuContainer: {
     flexDirection: 'column',
     alignItems: 'center',

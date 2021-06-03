@@ -9,8 +9,10 @@ import {
   Image,
 } from 'react-native';
 // import {globalStyles} from '../theme/appTheme';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import {globalStyles} from '../theme/appTheme';
 
 export const ScanScreen = () => {
   const navigation: any = useNavigation();
@@ -28,7 +30,7 @@ export const ScanScreen = () => {
         <TouchableOpacity
           style={styles.btnMenu}
           onPress={() => navigation.toggleDrawer()}>
-          <Text>Menu</Text>
+          <Icon name="menu-outline" style={globalStyles.icon} />
         </TouchableOpacity>
       ),
     });

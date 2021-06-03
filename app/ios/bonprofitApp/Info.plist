@@ -57,5 +57,9 @@
 	<!-- Access to camera roll -->
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your message to user when the photo library is accessed for the first time</string>
+  <key>UIAppFonts</key>
+  <array>
+    <string>Ionicons.ttf</string>
+  </array>
 </dict>
 </plist>
