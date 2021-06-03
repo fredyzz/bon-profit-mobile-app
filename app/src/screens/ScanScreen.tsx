@@ -8,11 +8,10 @@ import {
   View,
   Image,
 } from 'react-native';
-// import {globalStyles} from '../theme/appTheme';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Colors} from '../theme/colors';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {globalStyles} from '../theme/appTheme';
+import {Colors} from '../theme/colors';
 
 export const ScanScreen = () => {
   const navigation: any = useNavigation();
@@ -26,9 +25,8 @@ export const ScanScreen = () => {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        // <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <TouchableOpacity
-          style={styles.btnMenu}
+          style={globalStyles.btnMenu}
           onPress={() => navigation.toggleDrawer()}>
           <Icon name="menu-outline" style={globalStyles.icon} />
         </TouchableOpacity>
@@ -37,8 +35,8 @@ export const ScanScreen = () => {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.frame}>
+    <View style={globalStyles.frameContainer}>
+      <View style={globalStyles.frame}>
         <Image
           style={styles.logo}
           source={require('../images/BonProfit-color.png')}
@@ -55,21 +53,6 @@ export const ScanScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.primary,
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  frame: {
-    width: '100%',
-    height: '95%',
-    borderTopEndRadius: 100,
-    borderTopStartRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-  },
   logo: {
     width: 140,
     height: 140,
@@ -77,7 +60,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     marginTop: -120,
   },
-
   scanner: {
     width: 250,
     height: 250,
@@ -89,26 +71,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,
-  },
-  btnMenu: {
-    backgroundColor: Colors.white,
-    marginTop: 30,
-    marginLeft: 30,
-    width: 50,
-    height: 50,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   instructions: {
     marginTop: 40,

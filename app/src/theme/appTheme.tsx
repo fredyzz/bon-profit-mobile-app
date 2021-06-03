@@ -5,6 +5,21 @@ export const globalStyles = StyleSheet.create({
   globalMargin: {
     marginHorizontal: 20,
   },
+  frameContainer: {
+    backgroundColor: Colors.primary,
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  frame: {
+    width: '100%',
+    height: '95%',
+    borderTopEndRadius: 100,
+    borderTopStartRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+  },
   title: {
     fontSize: 30,
     marginTop: 30,
@@ -66,6 +81,25 @@ export const globalStyles = StyleSheet.create({
   drawerMenuItem: {
     marginBottom: 40,
     fontSize: 20,
+  },
+  btnMenu: {
+    backgroundColor: Colors.white,
+    marginTop: 30,
+    marginLeft: 30,
+    width: 50,
+    height: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonDisabled: {
     backgroundColor: Colors.disabled,
