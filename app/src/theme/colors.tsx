@@ -3,4 +3,5 @@ export const Colors = {
   resalt: '#40916c',
   dark: '#081c15',
   disabled: '#ececec',
+  white: 'white',
 };

@@ -56,18 +56,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primary,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   frame: {
-    flex: 1,
     width: '100%',
-    height: '80%',
+    height: '95%',
     borderTopEndRadius: 100,
     borderTopStartRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
   },
   logo: {
     width: 140,
@@ -90,7 +89,24 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   btnMenu: {
-    paddingLeft: 30,
+    backgroundColor: Colors.white,
+    marginTop: 30,
+    marginLeft: 30,
+    width: 50,
+    height: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   instructions: {
     marginTop: 40,
