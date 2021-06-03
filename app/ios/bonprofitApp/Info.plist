@@ -51,5 +51,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- Message to ask user to authorize camera access -->
+	<key>NSCameraUsageDescription</key>
+	<string>Please authorize Bon Profit to access to the camera</string>
+	<!-- Access to camera roll -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
 </dict>
 </plist>
