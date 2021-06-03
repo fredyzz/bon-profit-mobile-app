@@ -15,14 +15,11 @@ import {
 import {StackNavigator} from './StackNavigator';
 import {LoginScreen} from '../screens/auth/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
-import {RegisterScreen} from '../screens/auth/RegisterScreen'
-import {SuccessScreen} from '../screens/common/SuccessScreen'
+import {RegisterScreen} from '../screens/auth/RegisterScreen';
+import {SuccessScreen} from '../screens/common/SuccessScreen';
 import {globalStyles} from '../theme/appTheme';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-const Drawer = createDrawerNavigator(
-
-);
+const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
   const {width} = useWindowDimensions();
@@ -55,7 +52,6 @@ export const DrawerNavigator = () => {
         options={{title: 'Home'}}
         component={StackNavigator}
       />
-      
     </Drawer.Navigator>
   );
 };
@@ -63,7 +59,6 @@ export const DrawerNavigator = () => {
 const DrawerContent = ({
   navigation,
 }: DrawerContentComponentProps<DrawerContentOptions>) => {
-
   return (
     <DrawerContentScrollView>
       <View>
@@ -84,9 +79,7 @@ const DrawerContent = ({
         <TouchableOpacity
           style={globalStyles.drawerMenuItem}
           onPress={() => navigation.navigate('SettingsScreen')}>
-          <Text>
-            Settings
-          </Text>
+          <Text>Settings</Text>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>

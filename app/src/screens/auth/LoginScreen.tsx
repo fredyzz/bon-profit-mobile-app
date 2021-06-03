@@ -1,18 +1,28 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
-import {AuthContext} from '../../store/context/AuthContext'
-import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
+import {AuthContext} from '../../store/context/AuthContext';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  TextInput,
+  Alert,
+} from 'react-native';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
-import {login} from '../../services/auth/login'
-import {validateLoginForm} from '../../helpers/login'
+import {login} from '../../services/auth/login';
+import {validateLoginForm} from '../../helpers/login';
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
+
 export const LoginScreen = ({navigation}: Props) => {
-    const [emailInput, setEmailInput] = useState('')
-    const [passwordInput, setPasswordInput] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,56 +37,59 @@ export const LoginScreen = ({navigation}: Props) => {
     });
   }, [navigation]);
 
-    const {authState, signIn} = useContext(AuthContext);
+  const {authState, signIn} = useContext(AuthContext);
 
-  useEffect( () => {
-    if(!authState.isLoggedIn) {console.log('No esta logeado')}
-    else {navigation.navigate('SuccessScreen')}
+  useEffect(() => {
+    if (!authState.isLoggedIn) {
+      console.log('No esta logeado');
+    } else {
+      navigation.navigate('SuccessScreen');
+    }
+  }, [authState, navigation]);
 
-  }, [authState])
-
-    const handleLogin = async () => {
-        const {isValid, message} = validateLoginForm({email: emailInput, password: passwordInput})
-        if(!isValid) {
-           Alert.alert(
-                "Something went wrong",
-                message
-            )
-          } else {
-            const {success, message, ...loginResult} = await login(emailInput, passwordInput)
-            console.log(success)
-           if(success) signIn(loginResult)
-           if(!success) {
-             Alert.alert(
-                "Something went wrong",
-                message
-            )
-           }
-          }
-        }
-
+  const handleLogin = async () => {
+    const {isValid, message} = validateLoginForm({
+      email,
+      password,
+    });
+    if (!isValid) {
+      Alert.alert('Something went wrong', message);
+    } else {
+      const {
+        success,
+        message: errorMessage,
+        ...loginResult
+      } = await login(email, password);
+      if (success) {
+        signIn(loginResult);
+      }
+      if (!success) {
+        Alert.alert('Something went wrong', errorMessage);
+      }
+    }
+  };
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-     <Image
-          style={styles.logo}
-          source={require('../../images/BonProfit-color.png')}
-        />
-      <Text style={[globalStyles.title, globalStyles.center]}>Bon Profit</Text>
+      <Image
+        style={styles.logo}
+        source={require('../../images/BonProfit-color.png')}
+      />
+      <Text style={[globalStyles.title]}>Bon Profit</Text>
       <View style={styles.inputContainer}>
-         <TextInput
-        style={globalStyles.input}
-        placeholder='email'
-        onChangeText={(value) => setEmailInput(value)}
-        value={emailInput}
-      />
-      <TextInput
-        style={globalStyles.input}
-        secureTextEntry={true}
-        placeholder='password'
-        onChangeText={(value) => setPasswordInput(value)}
-        value={passwordInput}
-      />
+        <TextInput
+          style={globalStyles.input}
+          placeholder="email"
+          onChangeText={value => setEmail(value)}
+          value={email}
+        />
+        <TextInput
+          style={globalStyles.input}
+          secureTextEntry={true}
+          placeholder="password"
+          onChangeText={value => setPassword(value)}
+          value={password}
+        />
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
@@ -89,7 +102,9 @@ export const LoginScreen = ({navigation}: Props) => {
         <TouchableOpacity
           style={[globalStyles.textButtonContainer]}
           onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={globalStyles.textButton}>¿Not registered yet? Click here to register</Text>
+          <Text style={globalStyles.textButton}>
+            ¿Not registered yet? Click here to register
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -97,22 +112,21 @@ export const LoginScreen = ({navigation}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center'},
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   logo: {
-      width: 200,
-      height: 200,
-       resizeMode: 'contain',
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
   btnContainer: {
-      width:'100%',
-      flexDirection: 'row',
-      justifyContent:'center'},
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   inputContainer: {
-      width: '100%',
-      alignItems: 'center',
-      flexDirection:'column',
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
   btnLogin: {backgroundColor: Colors.primary},
   btnMenu: {

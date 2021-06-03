@@ -1,19 +1,21 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect, useContext, useState} from 'react';
-import {AuthContext} from '../../store/context/AuthContext'
-import {Button, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
+import React, {useEffect, useContext} from 'react';
+import {AuthContext} from '../../store/context/AuthContext';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
-import {login} from '../../services/auth/login'
-import {validateLoginForm} from '../../helpers/login'
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 export const SuccessScreen = ({navigation}: Props) => {
-    const [emailInput, setEmailInput] = useState('')
-    const [passwordInput, setPasswordInput] = useState('')
-
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -26,22 +28,20 @@ export const SuccessScreen = ({navigation}: Props) => {
     });
   }, [navigation]);
 
-    const {authState, signIn} = useContext(AuthContext);
+  const {authState} = useContext(AuthContext);
 
-  useEffect( () => {
-    if(!authState.isLoggedIn) {console.log('No esta logeado')}
-    else {navigation.navigate('StackNavigator')}
-
-  }, [authState])
-
+  useEffect(() => {
+    if (!authState.isLoggedIn) {
+      console.log('No esta logeado');
+    } else {
+      navigation.navigate('StackNavigator');
+    }
+  }, [authState, navigation]);
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-     <Image
-          style={styles.logo}
-          source={require('../../images/success.gif')}
-        />
-      <Text style={[globalStyles.title, globalStyles.center]}>¡You made it!</Text>
+      <Image style={styles.logo} source={require('../../images/success.gif')} />
+      <Text style={[globalStyles.title]}>¡You made it!</Text>
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={[globalStyles.bigButton, styles.btnLogin]}
@@ -54,22 +54,21 @@ export const SuccessScreen = ({navigation}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center'},
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   logo: {
-      width: 200,
-      height: 200,
-       resizeMode: 'contain',
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
   btnContainer: {
-      width:'100%',
-      flexDirection: 'row',
-      justifyContent:'center'},
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   inputContainer: {
-      width: '100%',
-      alignItems: 'center',
-      flexDirection:'column',
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
   btnLogin: {backgroundColor: Colors.primary},
   btnMenu: {

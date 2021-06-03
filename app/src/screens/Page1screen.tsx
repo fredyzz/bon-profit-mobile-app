@@ -1,7 +1,7 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext} from 'react';
-import {AuthContext} from '../store/context/AuthContext'
+import {AuthContext} from '../store/context/AuthContext';
 import {Button, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
@@ -22,11 +22,13 @@ export const Page1screen = ({navigation}: Props) => {
     });
   }, [navigation]);
 
-    const {authState} = useContext(AuthContext);
+  const {authState} = useContext(AuthContext);
 
-  useEffect( () => {
-    if(!authState.isLoggedIn) console.log('No esta logeado')
-  }, [])
+  useEffect(() => {
+    if (authState.isLoggedIn) {
+      console.log('Esta logeado');
+    }
+  }, [authState]);
 
   return (
     <View style={[globalStyles.globalMargin, styles.container]}>
