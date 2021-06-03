@@ -65,10 +65,8 @@ export const Page1screen = ({navigation}: Props) => {
 };
 
 const styles = StyleSheet.create({
+  btnMenu: {width: 100, paddingLeft: 30, backgroundColor: 'red'},
   container: {flex: 1},
   btnContainer: {flexDirection: 'row'},
   btnBgRed: {backgroundColor: 'red'},
-  btnMenu: {
-    marginLeft: 20,
-  },
 });

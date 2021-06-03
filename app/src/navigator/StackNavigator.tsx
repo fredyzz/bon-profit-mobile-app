@@ -1,9 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Page1screen} from '../screens/Page1screen';
-import {Page2screen} from '../screens/Page2screen';
+// import {Page1screen} from '../screens/Page1screen';
+import {ScanScreen} from '../screens/ScanScreen';
 import {Page3screen} from '../screens/Page3screen';
 import {PersonScreen} from '../screens/PersonScreen';
+import {Colors} from '../theme/colors';
 
 export type RootStackParams = {
   Page1screen: undefined;
@@ -27,20 +28,33 @@ export const StackNavigator = () => {
           backgroundColor: 'white',
         },
       }}>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="LoginScreen"
         options={{title: 'Login'}}
         component={Page1screen}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="Page1screen"
         options={{title: 'Page 1'}}
-        component={Page1screen}
-      />
+        component={ScanScreen}
+      /> */}
       <Stack.Screen
-        name="Page2screen"
-        options={{title: 'Page 2'}}
-        component={Page2screen}
+        name="ScanScreen"
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0,
+            },
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={ScanScreen}
       />
       <Stack.Screen
         name="Page3screen"
