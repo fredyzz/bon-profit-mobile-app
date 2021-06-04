@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {env} from '../../../.env.js';
 interface loginFormResponse {
   success: boolean;
   message: string;
@@ -16,8 +16,8 @@ export async function login(
   email: String,
   password: String,
 ): Promise<loginFormResponse> {
-  const LOGIN_URL = 'https://bon-profit-server.herokuapp.com/api/auth/login';
-  const USER_URL = 'https://bon-profit-server.herokuapp.com/api/user';
+  const LOGIN_URL = env.ENDPOINTS.LOGIN_URL;
+  const USER_URL = env.ENDPOINTS.USER_URL;
 
   try {
     const {
