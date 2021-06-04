@@ -1,12 +1,13 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useEffect} from 'react';
+import {validateQr, Scan} from '../services/validators/qrValidator';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
-  Linking,
   TouchableOpacity,
   View,
   Image,
+  Alert,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,15 +16,19 @@ import {Colors} from '../theme/colors';
 
 export const ScanScreen = () => {
   const navigation: any = useNavigation();
+  const [isScanning, setIsScanning] = useState(false);
 
-  const onSuccess = (event: any) => {
-    console.log('event ---------->', event);
-    const restaurantId = event.data.split('-')[0];
-    const tableId = event.data.split('-')[1];
-    navigation.navigate('Page3screen', {
-      restaurantId,
-      tableId,
-    });
+  const onSuccess = ({data}: {data: string}) => {
+    const {success, restaurantId, tableId}: Scan = validateQr(data);
+    if (success) {
+      setIsScanning(false);
+      navigation.navigate('RestaurantScreen', {
+        restaurantId,
+        tableId,
+      });
+    } else {
+      Alert.alert('Please scan a valid QR');
+    }
   };
 
   useEffect(() => {
@@ -38,6 +43,10 @@ export const ScanScreen = () => {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    setIsScanning(true);
+  }, []);
+
   return (
     <View style={globalStyles.frameContainer}>
       <View style={globalStyles.frame}>
@@ -46,7 +55,12 @@ export const ScanScreen = () => {
           source={require('../images/BonProfit-color.png')}
         />
         <View style={styles.scanner}>
-          <QRCodeScanner cameraStyle={styles.camera} onRead={onSuccess} />
+          <QRCodeScanner
+            cameraStyle={styles.camera}
+            onRead={onSuccess}
+            reactivate={isScanning}
+            reactivateTimeout={1500}
+          />
         </View>
         <View style={styles.instructions}>
           <Text style={styles.instructionsText}>Scan the QR of the table</Text>

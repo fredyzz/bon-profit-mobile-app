@@ -1,16 +1,15 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-// import {Page1screen} from '../screens/Page1screen';
 import {ScanScreen} from '../screens/ScanScreen';
-import {Page3screen} from '../screens/Page3screen';
+import {RestaurantScreen} from '../screens/RestaurantScreen';
 import {PersonScreen} from '../screens/PersonScreen';
 import {Colors} from '../theme/colors';
 
 export type RootStackParams = {
-  Page1screen: undefined;
-  Page2screen: undefined;
-  Page3screen: undefined;
+  ScanScreen: undefined;
+  RestaurantScreen: {restaurantId: string; tableId: string};
   PersonScreen: {id: number; name: string};
+  Page3screen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -18,7 +17,6 @@ const Stack = createStackNavigator<RootStackParams>();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator
-      // initialRouteName="Page2screen"
       screenOptions={{
         headerStyle: {
           elevation: 0,
@@ -28,16 +26,6 @@ export const StackNavigator = () => {
           backgroundColor: 'white',
         },
       }}>
-      {/* <Stack.Screen
-        name="LoginScreen"
-        options={{title: 'Login'}}
-        component={Page1screen}
-      /> */}
-      {/* <Stack.Screen
-        name="Page1screen"
-        options={{title: 'Page 1'}}
-        component={ScanScreen}
-      /> */}
       <Stack.Screen
         name="ScanScreen"
         options={{
@@ -46,6 +34,7 @@ export const StackNavigator = () => {
             backgroundColor: Colors.primary,
             shadowRadius: 0,
             shadowOffset: {
+              width: 0,
               height: 0,
             },
           },
@@ -57,9 +46,9 @@ export const StackNavigator = () => {
         component={ScanScreen}
       />
       <Stack.Screen
-        name="Page3screen"
-        options={{title: 'Page 3'}}
-        component={Page3screen}
+        name="RestaurantScreen"
+        options={{title: 'Restaurant'}}
+        component={RestaurantScreen}
       />
       <Stack.Screen
         name="PersonScreen"

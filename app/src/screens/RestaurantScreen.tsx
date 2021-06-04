@@ -10,7 +10,7 @@ interface RouteParams {
   tableId: string;
 }
 
-export const Page3screen = ({route, navigation}: Props) => {
+export const RestaurantScreen = ({route, navigation}: Props) => {
   const params = route.params as RouteParams;
   return (
     <View style={[globalStyles.globalMargin, styles.container]}>

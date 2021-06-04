@@ -1,5 +1,4 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
-// import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../../store/context/AuthContext';
 import {
@@ -17,7 +16,6 @@ import {Colors} from '../../theme/colors';
 import {login} from '../../services/auth/login';
 import {validateLoginForm} from '../../helpers/login';
 
-// interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 
 export const LoginScreen = ({navigation}: Props) => {
@@ -27,7 +25,6 @@ export const LoginScreen = ({navigation}: Props) => {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        // <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <TouchableOpacity
           style={styles.btnMenu}
           onPress={() => navigation.toggleDrawer()}>
