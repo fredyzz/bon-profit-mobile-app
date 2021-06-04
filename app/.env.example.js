@@ -2,6 +2,7 @@ const _Environments = {
     ENDPOINTS:  {
         LOGIN_URL:'<Your login url>',
         USER_URL: '<Your user url>',
+        RESTAURANTS_URL: '<Your restaurants url>'
     }
   
 }

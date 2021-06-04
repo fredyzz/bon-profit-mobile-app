@@ -19,6 +19,7 @@ import {validateLoginForm} from '../../helpers/login';
 interface Props extends DrawerScreenProps<any, any> {}
 
 export const LoginScreen = ({navigation}: Props) => {
+  const {authState, signIn} = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,12 +35,8 @@ export const LoginScreen = ({navigation}: Props) => {
     });
   }, [navigation]);
 
-  const {authState, signIn} = useContext(AuthContext);
-
   useEffect(() => {
-    if (!authState.isLoggedIn) {
-      console.log('No esta logeado');
-    } else {
+    if (authState.isLoggedIn) {
       navigation.navigate('SuccessScreen');
     }
   }, [authState, navigation]);

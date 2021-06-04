@@ -13,10 +13,8 @@ export const authInitialState: AuthState = {
   },
 };
 
-//Create Context
 export const AuthContext = createContext({} as AuthContextProps);
 
-//State provider component
 export const AuthProvider = ({children}: {children: JSX.Element}) => {
   const [authState, dispatch] = useReducer(authReducer, authInitialState);
 
