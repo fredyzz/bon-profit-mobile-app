@@ -16,8 +16,8 @@ export async function login(
   email: String,
   password: String,
 ): Promise<loginFormResponse> {
-  const LOGIN_URL = 'http://localhost:4000/api/auth/login';
-  const USER_URL = 'http://localhost:4000/api/user';
+  const LOGIN_URL = 'https://bon-profit-server.herokuapp.com/api/auth/login';
+  const USER_URL = 'https://bon-profit-server.herokuapp.com/api/user';
 
   try {
     const {

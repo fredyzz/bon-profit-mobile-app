@@ -16,10 +16,14 @@ import {Colors} from '../theme/colors';
 export const ScanScreen = () => {
   const navigation: any = useNavigation();
 
-  const onSuccess = (event: {data: string}) => {
-    Linking.openURL(event.data).catch(err =>
-      console.error('An error occured', err),
-    );
+  const onSuccess = (event: any) => {
+    console.log('event ---------->', event);
+    const restaurantId = event.data.split('-')[0];
+    const tableId = event.data.split('-')[1];
+    navigation.navigate('Page3screen', {
+      restaurantId,
+      tableId,
+    });
   };
 
   useEffect(() => {

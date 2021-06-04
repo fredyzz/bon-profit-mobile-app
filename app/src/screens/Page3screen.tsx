@@ -5,10 +5,18 @@ import {globalStyles} from '../theme/appTheme';
 
 interface Props extends StackScreenProps<any, any> {}
 
-export const Page3screen = ({navigation}: Props) => {
+interface RouteParams {
+  restaurantId: string;
+  tableId: string;
+}
+
+export const Page3screen = ({route, navigation}: Props) => {
+  const params = route.params as RouteParams;
   return (
     <View style={[globalStyles.globalMargin, styles.container]}>
-      <Text style={globalStyles.title}>Page 3</Text>
+      <Text style={globalStyles.title}>
+        {`restaurantId: ${params.restaurantId} tableId: ${params.tableId}`}
+      </Text>
       <Button
         title="Go to page 2"
         onPress={() => navigation.navigate('Page2screen')}
