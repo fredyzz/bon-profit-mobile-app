@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {DishCard} from './common/DishCard';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {getDishCategories, filterDishByCategory} from '../helpers/restaurants';
 
 interface RouteParams {
   restaurantId: string;
@@ -44,13 +45,20 @@ export const RestaurantScreen = ({route}: any) => {
       headerLeft: () => (
         <TouchableOpacity
           style={globalStyles.btnMenu}
-          onPress={() => navigation.goBack()}>
+          onPress={() => navigation.navigate('ScanScreen')}>
           <Icon name="chevron-back-outline" style={globalStyles.icon} />
         </TouchableOpacity>
       ),
       headerTitle: () => (
         <View style={styles.headerTitle}>
-          <Image style={styles.logo} source={{uri: restaurant?.avatarUrl}} />
+          <Image
+            style={styles.logo}
+            source={
+              restaurant?.avatarUrl
+                ? {uri: restaurant?.avatarUrl}
+                : require('../images/avatar-placeholder.png')
+            }
+          />
           <Text style={[globalStyles.title, styles.title]}>
             {restaurant?.name}
           </Text>
@@ -72,6 +80,11 @@ export const RestaurantScreen = ({route}: any) => {
 
   return restaurant ? (
     <View style={globalStyles.frameContainer}>
+      {console.log(getDishCategories(restaurant.dishes))}
+      {console.log(
+        'filtered italian',
+        filterDishByCategory(restaurant.dishes, 'argentinian'),
+      )}
       <View style={globalStyles.frame}>
         <View style={styles.container}>
           <FlatList

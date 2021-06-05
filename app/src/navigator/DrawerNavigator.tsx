@@ -68,9 +68,7 @@ const DrawerContent = ({
       <View>
         <Image
           style={globalStyles.avatar}
-          source={{
-            uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
-          }}
+          source={require('../images/avatar-placeholder.png')}
         />
       </View>
 
