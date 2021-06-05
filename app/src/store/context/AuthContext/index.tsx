@@ -20,8 +20,14 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
 
   const signIn = (updatedState: any) => {
     dispatch({
-      type: 'login',
+      type: 'signIn',
       data: updatedState,
+    });
+  };
+
+  const signOut = () => {
+    dispatch({
+      type: 'signOut',
     });
   };
 
@@ -30,6 +36,7 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
       value={{
         authState,
         signIn,
+        signOut,
       }}>
       {children}
     </AuthContext.Provider>

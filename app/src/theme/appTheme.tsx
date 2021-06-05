@@ -65,6 +65,14 @@ export const globalStyles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
   },
+  menuItem: {
+    flexDirection: 'row',
+  },
+  menuItemText: {
+    paddingTop: 7,
+    paddingLeft: 7,
+    height: 30,
+  },
   icon: {
     display: 'flex',
     justifyContent: 'center',

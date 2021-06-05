@@ -1,7 +1,4 @@
-export type authAction = {
-  type: 'login';
-  data: {};
-};
+export type authAction = {type: 'signIn'; data: {}} | {type: 'signOut'};
 
 export type restaurantAction = {
   type: 'login';

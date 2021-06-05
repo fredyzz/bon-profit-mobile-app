@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
@@ -18,11 +18,14 @@ import {SettingsScreen} from '../screens/SettingsScreen';
 import {RegisterScreen} from '../screens/auth/RegisterScreen';
 import {SuccessScreen} from '../screens/common/SuccessScreen';
 import {globalStyles} from '../theme/appTheme';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {AuthContext} from '../store/context/AuthContext/';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
   const {width} = useWindowDimensions();
+
   return (
     <Drawer.Navigator
       drawerType={width >= 768 ? 'slide' : 'front'}
@@ -59,6 +62,7 @@ export const DrawerNavigator = () => {
 const DrawerContent = ({
   navigation,
 }: DrawerContentComponentProps<DrawerContentOptions>) => {
+  const {signOut} = useContext(AuthContext);
   return (
     <DrawerContentScrollView>
       <View>
@@ -80,6 +84,12 @@ const DrawerContent = ({
           style={globalStyles.drawerMenuItem}
           onPress={() => navigation.navigate('SettingsScreen')}>
           <Text>Settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={globalStyles.drawerMenuItem} onPress={signOut}>
+          <View style={globalStyles.menuItem}>
+            <Icon name="log-out-outline" style={globalStyles.icon} />
+            <Text style={globalStyles.menuItemText}>Logout</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>

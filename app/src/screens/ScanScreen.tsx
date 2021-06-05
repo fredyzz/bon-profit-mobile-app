@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import {validateQr, Scan} from '../services/validators/qrValidator';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,12 +11,20 @@ import {
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {AuthContext} from '../store/context/AuthContext/';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
 
 export const ScanScreen = () => {
+  const {authState} = useContext(AuthContext);
   const navigation: any = useNavigation();
   const [isScanning, setIsScanning] = useState(false);
+
+  useEffect(() => {
+    if (!authState.isLoggedIn) {
+      navigation.navigate('LoginScreen');
+    }
+  }, [navigation, authState]);
 
   const onSuccess = ({data}: {data: string}) => {
     const {success, restaurantId, tableId}: Scan = validateQr(data);
