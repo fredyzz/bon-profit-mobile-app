@@ -22,7 +22,10 @@ export const DishCard = ({dish}: Props) => {
         <TouchableOpacity
           style={styles.actionButton}
           onPress={() => console.log('added to cart', dish._id)}>
-          <Icon name="add-outline" style={globalStyles.icon} />
+          <Icon
+            name="add-outline"
+            style={[globalStyles.icon, styles.actionButtonText]}
+          />
         </TouchableOpacity>
       </View>
       <View />
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 3.84,
-
     elevation: 4,
   },
+  actionButtonText: {color: Colors.white},
 });
