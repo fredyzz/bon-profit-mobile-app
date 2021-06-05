@@ -73,6 +73,9 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 7,
     height: 30,
   },
+  cardTitle: {
+    fontSize: 30,
+  },
   icon: {
     display: 'flex',
     justifyContent: 'center',
