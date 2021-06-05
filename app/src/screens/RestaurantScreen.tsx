@@ -31,7 +31,9 @@ export const RestaurantScreen = ({route, navigation}: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restaurantId, authState.token]);
 
-  const renderItem = ({item}: any) => <DishCard dish={item} />;
+  const renderItem = ({item}: any) => (
+    <DishCard dish={item} action={() => console.log(item._id)} />
+  );
 
   return restaurant ? (
     <View style={[globalStyles.globalMargin, styles.container]}>

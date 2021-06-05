@@ -8,8 +8,9 @@ import {Colors} from '../../theme/colors';
 
 interface Props {
   dish: Dish;
+  action: () => void;
 }
-export const DishCard = ({dish}: Props) => {
+export const DishCard = ({dish, action}: Props) => {
   return (
     <View style={styles.container}>
       <Image source={{uri: dish.imagesHref[0]}} style={styles.image} />
@@ -19,9 +20,7 @@ export const DishCard = ({dish}: Props) => {
         <Text style={styles.price}>€{dish.price}</Text>
       </View>
       <View>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => console.log('added to cart', dish._id)}>
+        <TouchableOpacity style={styles.actionButton} onPress={action}>
           <Icon
             name="add-outline"
             style={[globalStyles.icon, styles.actionButtonText]}
