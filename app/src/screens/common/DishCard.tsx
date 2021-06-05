@@ -1,6 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Dish} from '../../store/context/RestaurantContext/interfaces';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 
 interface Props {
@@ -10,7 +13,19 @@ export const DishCard = ({dish}: Props) => {
   return (
     <View style={styles.container}>
       <Image source={{uri: dish.imagesHref[0]}} style={styles.image} />
-      <Text style={styles.cardTitle}>{dish.title}</Text>
+      <View style={styles.dishData}>
+        <Text style={styles.title}>{dish.title}</Text>
+        <Text style={styles.category}>{dish.category}</Text>
+        <Text style={styles.price}>€{dish.price}</Text>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => console.log('added to cart', dish._id)}>
+          <Icon name="add-outline" style={globalStyles.icon} />
+        </TouchableOpacity>
+      </View>
+      <View />
     </View>
   );
 };
@@ -42,9 +57,40 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginRight: 20,
   },
-  cardTitle: {
+  dishData: {
+    height: '100%',
+    width: 160,
+    justifyContent: 'center',
+  },
+  title: {
     color: Colors.dark,
-    fontSize: 22,
-    marginTop: 16,
+    fontSize: 18,
+  },
+  category: {
+    color: Colors.resalt,
+    fontSize: 14,
+    marginTop: 2,
+  },
+  price: {
+    color: Colors.dark,
+    fontSize: 14,
+    marginTop: 2,
+  },
+  actionButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.primary,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.84,
+
+    elevation: 4,
   },
 });

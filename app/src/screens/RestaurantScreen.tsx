@@ -6,7 +6,6 @@ import {RestaurantContext} from '../store/context/RestaurantContext';
 import {getRestaurantById} from '../services/restaurant';
 import {DishCard} from './common/DishCard';
 import {globalStyles} from '../theme/appTheme';
-import {Dish} from '../store/context/RestaurantContext/interfaces';
 
 interface Props extends StackScreenProps<any, any> {}
 
