@@ -112,6 +112,10 @@ export const globalStyles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  btnMenuRight: {
+    marginLeft: 0,
+    marginRight: 30,
+  },
   buttonDisabled: {
     backgroundColor: Colors.disabled,
   },

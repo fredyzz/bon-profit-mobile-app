@@ -47,7 +47,21 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         name="RestaurantScreen"
-        options={{title: 'Restaurant'}}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            shadowRadius: 0,
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
         component={RestaurantScreen}
       />
       <Stack.Screen
