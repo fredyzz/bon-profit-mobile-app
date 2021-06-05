@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,7 @@ import {getRestaurantById} from '../services/restaurant';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {DishCard} from './common/DishCard';
 import {globalStyles} from '../theme/appTheme';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from '../theme/colors';
 import {getDishCategories, filterDishByCategory} from '../helpers/restaurants';
 import {CategoriesSlider} from './common/CategoriesSlider';
 
@@ -31,6 +31,7 @@ export const RestaurantScreen = ({route}: any) => {
     loadRestaurant,
   } = useContext(RestaurantContext);
   const {restaurantId} = route.params as RouteParams;
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     async function getRestaurant(): Promise<void> {
@@ -90,7 +91,8 @@ export const RestaurantScreen = ({route}: any) => {
         <View style={styles.container}>
           <CategoriesSlider
             categories={getDishCategories(restaurant.dishes)}
-            callBack={() => console.log('categori')}
+            callBack={category => setSelectedCategory(category)}
+            selectedCategory={selectedCategory}
           />
           <FlatList
             data={restaurant.dishes}

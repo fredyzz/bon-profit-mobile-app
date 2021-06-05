@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from '../../theme/colors';
 
 interface SliderProps {
   categories: Array<string>;
   callBack: (category: string) => void;
-  isSelected: boolean | undefined;
+  selectedCategory: string | undefined;
 }
 
 interface CardProps {
@@ -23,7 +23,7 @@ interface CardProps {
 const CategoryCard = ({category, callBack, isSelected}: CardProps) => (
   <View style={[styles.categoryCard, isSelected && styles.selected]}>
     <TouchableOpacity onPress={() => callBack(category)}>
-      <Text>{category}</Text>
+      <Text style={isSelected && styles.selected}>{category}</Text>
     </TouchableOpacity>
   </View>
 );
@@ -31,7 +31,7 @@ const CategoryCard = ({category, callBack, isSelected}: CardProps) => (
 export const CategoriesSlider = ({
   categories,
   callBack,
-  isSelected,
+  selectedCategory,
 }: SliderProps) => {
   return (
     <View style={styles.container}>
@@ -40,7 +40,7 @@ export const CategoriesSlider = ({
           <CategoryCard
             category={category}
             callBack={callBack}
-            isSelected={isSelected}
+            isSelected={category === selectedCategory ? true : false}
           />
         ))}
       </ScrollView>
@@ -75,6 +75,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selected: {
-    shadowColor: Colors.dark,
+    // shadowColor: Colors.primary,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 0,
+    // },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 5.84,
+
+    // elevation: 4,
+    backgroundColor: Colors.primary,
+    color: Colors.white,
   },
 });
