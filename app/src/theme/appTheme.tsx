@@ -83,7 +83,7 @@ export const globalStyles = StyleSheet.create({
   },
   drawerMenuContainer: {
     flexDirection: 'column',
-    alignItems: 'center',
+    marginLeft: 90,
     marginTop: 50,
   },
   drawerMenuItem: {

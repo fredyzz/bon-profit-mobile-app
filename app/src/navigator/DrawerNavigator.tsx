@@ -78,12 +78,18 @@ const DrawerContent = ({
         <TouchableOpacity
           onPress={() => navigation.navigate('StackNavigator')}
           style={globalStyles.drawerMenuItem}>
-          <Text>Home</Text>
+          <View style={globalStyles.menuItem}>
+            <Icon name="qr-code-outline" style={globalStyles.icon} />
+            <Text style={globalStyles.menuItemText}>Menu</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={globalStyles.drawerMenuItem}
           onPress={() => navigation.navigate('SettingsScreen')}>
-          <Text>Settings</Text>
+          <View style={globalStyles.menuItem}>
+            <Icon name="options-outline" style={globalStyles.icon} />
+            <Text style={globalStyles.menuItemText}>Settings</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity style={globalStyles.drawerMenuItem} onPress={signOut}>
           <View style={globalStyles.menuItem}>
