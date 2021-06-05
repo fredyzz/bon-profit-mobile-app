@@ -16,6 +16,7 @@ import {DishCard} from './common/DishCard';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getDishCategories, filterDishByCategory} from '../helpers/restaurants';
+import {CategoriesSlider} from './common/CategoriesSlider';
 
 interface RouteParams {
   restaurantId: string;
@@ -87,6 +88,10 @@ export const RestaurantScreen = ({route}: any) => {
       )}
       <View style={globalStyles.frame}>
         <View style={styles.container}>
+          <CategoriesSlider
+            categories={getDishCategories(restaurant.dishes)}
+            callBack={() => console.log('categori')}
+          />
           <FlatList
             data={restaurant.dishes}
             renderItem={renderItem}
