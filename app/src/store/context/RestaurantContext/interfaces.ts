@@ -39,10 +39,10 @@ export interface Restaurant {
 }
 
 export interface RestaurantState {
-  restaurants: Array<Restaurant>;
+  restaurant: Restaurant | undefined;
 }
 
 export interface RestaurantContextProps {
   restaurantState: RestaurantState;
-  // signIn: (updatedState: any) => void;
+  loadRestaurant: (restaurant: Restaurant) => void;
 }
