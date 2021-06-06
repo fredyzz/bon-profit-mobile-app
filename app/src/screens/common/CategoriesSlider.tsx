@@ -76,15 +76,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selected: {
-    // shadowColor: Colors.primary,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 0,
-    // },
-    // shadowOpacity: 0.8,
-    // shadowRadius: 5.84,
-
-    // elevation: 4,
     backgroundColor: Colors.primary,
     color: Colors.white,
   },

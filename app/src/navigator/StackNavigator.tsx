@@ -48,6 +48,7 @@ export const StackNavigator = () => {
       <Stack.Screen
         name="RestaurantScreen"
         options={{
+          gestureEnabled: false,
           title: '',
           headerStyle: {
             backgroundColor: Colors.primary,

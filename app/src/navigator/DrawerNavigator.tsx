@@ -51,8 +51,11 @@ export const DrawerNavigator = () => {
         component={SettingsScreen}
       />
       <Drawer.Screen
+        options={{
+          title: 'Home',
+          gestureEnabled: false,
+        }}
         name="StackNavigator"
-        options={{title: 'Home'}}
         component={StackNavigator}
       />
     </Drawer.Navigator>

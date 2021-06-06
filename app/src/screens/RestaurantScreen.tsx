@@ -48,6 +48,9 @@ export const RestaurantScreen = ({route}: any) => {
 
   useEffect(() => {
     navigation.setOptions({
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
       headerLeft: () => (
         <TouchableOpacity
           style={globalStyles.btnMenu}
