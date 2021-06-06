@@ -12,10 +12,10 @@ export const getDishCategories = (dishList: Array<Dish>): Array<string> => {
 
 export const filterDishByCategory = (
   dishList: Array<Dish>,
-  category: string | undefined,
+  category: string,
 ): Array<Dish> => {
   if (!category) {
     return dishList;
   }
-  return dishList.filter(dish => dish.category !== category);
+  return dishList.filter(dish => dish.category === category);
 };

@@ -36,8 +36,9 @@ export const CategoriesSlider = ({
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView} horizontal={true}>
-        {categories.map(category => (
+        {categories.map((category, index) => (
           <CategoryCard
+            key={index}
             category={category}
             callBack={callBack}
             isSelected={category === selectedCategory ? true : false}

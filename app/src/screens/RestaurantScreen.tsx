@@ -32,11 +32,15 @@ export const RestaurantScreen = ({route}: any) => {
   } = useContext(RestaurantContext);
   const {restaurantId} = route.params as RouteParams;
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [filtererdDishes, setFilteredDishes] = useState([]);
 
   useEffect(() => {
     async function getRestaurant(): Promise<void> {
-      const restaurant = await getRestaurantById(restaurantId, authState.token);
-      loadRestaurant(restaurant);
+      const restaurantFromApi = await getRestaurantById(
+        restaurantId,
+        authState.token,
+      );
+      loadRestaurant(restaurantFromApi);
     }
     getRestaurant();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,26 +80,39 @@ export const RestaurantScreen = ({route}: any) => {
     });
   }, [navigation, restaurant]);
 
+  useEffect(() => {
+    if (restaurant?.dishes) {
+      const filterResult: any = filterDishByCategory(
+        restaurant?.dishes,
+        selectedCategory,
+      );
+      setFilteredDishes(filterResult);
+    }
+  }, [selectedCategory, restaurant]);
+
   const renderItem = ({item}: any) => (
     <DishCard dish={item} action={() => console.log(item._id)} />
   );
 
+  const toogleSelectedCategoty = (category: string): void => {
+    if (selectedCategory === category) {
+      setSelectedCategory('');
+    } else {
+      setSelectedCategory(category);
+    }
+  };
+
   return restaurant ? (
     <View style={globalStyles.frameContainer}>
-      {console.log(getDishCategories(restaurant.dishes))}
-      {console.log(
-        'filtered italian',
-        filterDishByCategory(restaurant.dishes, 'argentinian'),
-      )}
       <View style={globalStyles.frame}>
         <View style={styles.container}>
           <CategoriesSlider
             categories={getDishCategories(restaurant.dishes)}
-            callBack={category => setSelectedCategory(category)}
+            callBack={category => toogleSelectedCategoty(category)}
             selectedCategory={selectedCategory}
           />
           <FlatList
-            data={restaurant.dishes}
+            data={filtererdDishes ? filtererdDishes : restaurant.dishes}
             renderItem={renderItem}
             keyExtractor={item => item._id}
           />
