@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Colors} from '../../theme/colors';
+import {Colors} from '../theme/colors';
 
 interface SliderProps {
   categories: Array<string>;

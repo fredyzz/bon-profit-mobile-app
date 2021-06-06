@@ -14,7 +14,7 @@ import {
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 import {login} from '../../services/auth/login';
-import {validateLoginForm} from '../../helpers/login';
+import {validateLoginForm} from '../../helpers/login.validator';
 
 interface Props extends DrawerScreenProps<any, any> {}
 

@@ -491,7 +491,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C5E0F3A7F113238E22ED5FC /* Pods-bonprofitApp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6H2FE7TUQ;
@@ -518,7 +518,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E957A9A21F2236364C0AA606 /* Pods-bonprofitApp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6H2FE7TUQ;

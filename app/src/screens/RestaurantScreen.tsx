@@ -12,11 +12,14 @@ import {AuthContext} from '../store/context/AuthContext';
 import {RestaurantContext} from '../store/context/RestaurantContext';
 import {getRestaurantById} from '../services/restaurant';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {DishCard} from './common/DishCard';
+import {DishCard} from '../components/DishCard';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
-import {getDishCategories, filterDishByCategory} from '../helpers/restaurants';
-import {CategoriesSlider} from './common/CategoriesSlider';
+import {
+  getDishCategories,
+  filterDishByCategory,
+} from '../helpers/restaurant.helper';
+import {CategoriesSlider} from '../components/CategoriesSlider';
 
 interface RouteParams {
   restaurantId: string;

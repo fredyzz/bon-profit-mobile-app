@@ -4,7 +4,6 @@ export function restaurantReducer(
   state: RestaurantState,
   action: restaurantAction,
 ): RestaurantState {
-  console.log(action);
   switch (action.type) {
     case 'loadRestaurant':
       return {

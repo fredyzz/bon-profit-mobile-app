@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
-import {validateRegisterForm} from '../../helpers/register';
+import {validateRegisterForm} from '../../helpers/register.validator';
 import {register} from '../../services/auth/register';
 
 // interface Props extends StackScreenProps<any, any> {}

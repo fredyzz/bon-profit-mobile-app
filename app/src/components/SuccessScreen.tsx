@@ -1,7 +1,6 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
-// import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext} from 'react';
-import {AuthContext} from '../../store/context/AuthContext';
+import {AuthContext} from '../store/context/AuthContext';
 import {
   StyleSheet,
   Text,
@@ -10,10 +9,9 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import {globalStyles} from '../../theme/appTheme';
-import {Colors} from '../../theme/colors';
+import {globalStyles} from '../theme/appTheme';
+import {Colors} from '../theme/colors';
 
-// interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 export const SuccessScreen = ({navigation}: Props) => {
   useEffect(() => {
@@ -31,16 +29,14 @@ export const SuccessScreen = ({navigation}: Props) => {
   const {authState} = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authState.isLoggedIn) {
-      console.log('No esta logeado');
-    } else {
+    if (authState.isLoggedIn) {
       navigation.navigate('StackNavigator');
     }
   }, [authState, navigation]);
 
   return (
     <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-      <Image style={styles.logo} source={require('../../images/success.gif')} />
+      <Image style={styles.logo} source={require('../images/success.gif')} />
       <Text style={[globalStyles.title]}>¡You made it!</Text>
       <View style={styles.btnContainer}>
         <TouchableOpacity

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Dish} from '../../store/context/RestaurantContext/interfaces';
+import {Dish} from '../store/context/RestaurantContext/interfaces';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {globalStyles} from '../../theme/appTheme';
-import {Colors} from '../../theme/colors';
+import {globalStyles} from '../theme/appTheme';
+import {Colors} from '../theme/colors';
 
 interface Props {
   dish: Dish;

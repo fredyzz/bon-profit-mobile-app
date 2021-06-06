@@ -16,7 +16,7 @@ import {StackNavigator} from './StackNavigator';
 import {LoginScreen} from '../screens/auth/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {RegisterScreen} from '../screens/auth/RegisterScreen';
-import {SuccessScreen} from '../screens/common/SuccessScreen';
+import {SuccessScreen} from '../components/SuccessScreen';
 import {globalStyles} from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../store/context/AuthContext/';

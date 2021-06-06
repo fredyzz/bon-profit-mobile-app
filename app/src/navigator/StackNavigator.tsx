@@ -2,7 +2,6 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ScanScreen} from '../screens/ScanScreen';
 import {RestaurantScreen} from '../screens/RestaurantScreen';
-import {PersonScreen} from '../screens/PersonScreen';
 import {Colors} from '../theme/colors';
 
 export type RootStackParams = {
@@ -64,11 +63,6 @@ export const StackNavigator = () => {
           },
         }}
         component={RestaurantScreen}
-      />
-      <Stack.Screen
-        name="PersonScreen"
-        options={{title: 'Person screen'}}
-        component={PersonScreen}
       />
     </Stack.Navigator>
   );

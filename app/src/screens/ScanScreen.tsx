@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import {validateQr, Scan} from '../services/validators/qrValidator';
+import {validateQr, Scan} from '../helpers/qr.validator';
 import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
