@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a <CategoriesSlider/> component receiving an array with two categories should return two CategotyCard components 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "height": 140,
+      "justifyContent": "center",
+      "marginTop": 20,
+    }
+  }
+>
+  <RCTScrollView
+    horizontal={true}
+  >
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 20,
+              "elevation": 4,
+              "height": 120,
+              "justifyContent": "center",
+              "margin": 10,
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 2,
+                "width": 0,
+              },
+              "shadowOpacity": 0.2,
+              "shadowRadius": 3.84,
+              "width": 120,
+            },
+            Object {
+              "backgroundColor": "#95d5b2",
+              "color": "white",
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID="categoryCard-Italian"
+        >
+          <Text
+            style={
+              Object {
+                "backgroundColor": "#95d5b2",
+                "color": "white",
+              }
+            }
+          >
+            Italian
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 20,
+              "elevation": 4,
+              "height": 120,
+              "justifyContent": "center",
+              "margin": 10,
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 2,
+                "width": 0,
+              },
+              "shadowOpacity": 0.2,
+              "shadowRadius": 3.84,
+              "width": 120,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID="categoryCard-Argentinian"
+        >
+          <Text
+            style={false}
+          >
+            Argentinian
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

@@ -1,32 +1,12 @@
 import * as React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import {Colors} from '../theme/colors';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {CategoryCard} from './CategoryCard';
 
 interface SliderProps {
   categories: Array<string>;
   callBack: (category: string) => void;
   selectedCategory: string | undefined;
 }
-
-interface CardProps {
-  category: string;
-  callBack: (category: string) => void;
-  isSelected: boolean | undefined;
-}
-
-const CategoryCard = ({category, callBack, isSelected}: CardProps) => (
-  <View style={[styles.categoryCard, isSelected && styles.selected]}>
-    <TouchableOpacity onPress={() => callBack(category)}>
-      <Text style={isSelected && styles.selected}>{category}</Text>
-    </TouchableOpacity>
-  </View>
-);
 
 export const CategoriesSlider = ({
   categories,
@@ -35,7 +15,7 @@ export const CategoriesSlider = ({
 }: SliderProps) => {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView} horizontal={true}>
+      <ScrollView horizontal={true}>
         {categories.map((category, index) => (
           <CategoryCard
             key={index}
@@ -55,28 +35,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  scrollView: {},
-  categoryCard: {
-    width: 120,
-    height: 120,
-    backgroundColor: Colors.white,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3.84,
-
-    elevation: 4,
-    margin: 10,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selected: {
-    backgroundColor: Colors.primary,
-    color: Colors.white,
   },
 });
