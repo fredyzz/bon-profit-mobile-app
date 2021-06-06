@@ -85,24 +85,28 @@ export const RegisterScreen = ({navigation}: Props) => {
         <TextInput
           style={globalStyles.input}
           placeholder="name"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setName(value)}
           value={name}
         />
         <TextInput
           style={globalStyles.input}
           placeholder="lastname"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setLastName(value)}
           value={lastname}
         />
         <TextInput
           style={globalStyles.input}
           placeholder="phone"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setPhone(value)}
           value={phone}
         />
         <TextInput
           style={globalStyles.input}
           placeholder="email"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setEmail(value.toLowerCase())}
           value={email}
         />
@@ -110,6 +114,7 @@ export const RegisterScreen = ({navigation}: Props) => {
           style={globalStyles.input}
           secureTextEntry={true}
           placeholder="password"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setPassword(value)}
           value={password}
         />
@@ -117,6 +122,7 @@ export const RegisterScreen = ({navigation}: Props) => {
           style={globalStyles.input}
           secureTextEntry={true}
           placeholder="repeat password"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setPasswordRepeat(value)}
           value={passwordRepeat}
         />

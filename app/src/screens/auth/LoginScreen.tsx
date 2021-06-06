@@ -74,6 +74,7 @@ export const LoginScreen = ({navigation}: Props) => {
         <TextInput
           style={globalStyles.input}
           placeholder="email"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setEmail(value)}
           value={email}
         />
@@ -81,6 +82,7 @@ export const LoginScreen = ({navigation}: Props) => {
           style={globalStyles.input}
           secureTextEntry={true}
           placeholder="password"
+          placeholderTextColor={Colors.primary}
           onChangeText={value => setPassword(value)}
           value={password}
         />
