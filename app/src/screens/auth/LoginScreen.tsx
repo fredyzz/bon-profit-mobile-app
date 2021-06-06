@@ -27,6 +27,7 @@ export const LoginScreen = ({navigation}: Props) => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity
+          testID="login-btnMenu"
           style={styles.btnMenu}
           onPress={() => navigation.toggleDrawer()}>
           <Text>Menu</Text>

@@ -52,6 +52,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFiles": ["<rootDir>/jest.setup.js"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
