@@ -20,6 +20,7 @@ import {
   filterDishByCategory,
 } from '../helpers/restaurant.helper';
 import {CategoriesSlider} from '../components/CategoriesSlider';
+import {CartContext} from '../store/context/CartContext';
 
 interface RouteParams {
   restaurantId: string;
@@ -29,6 +30,7 @@ interface RouteParams {
 export const RestaurantScreen = ({route}: any) => {
   const navigation: any = useNavigation();
   const {authState} = useContext(AuthContext);
+  const {cartState, addToCart} = useContext(CartContext);
   const {
     restaurantState: {restaurant},
     loadRestaurant,
@@ -49,6 +51,9 @@ export const RestaurantScreen = ({route}: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restaurantId, authState.token]);
 
+  useEffect(() => {
+    console.log('CartState -----> ', cartState);
+  }, [cartState]);
   useEffect(() => {
     navigation.setOptions({
       navigationOptions: {
@@ -97,7 +102,7 @@ export const RestaurantScreen = ({route}: any) => {
   }, [selectedCategory, restaurant]);
 
   const renderItem = ({item}: any) => (
-    <DishCard dish={item} action={() => console.log(item._id)} />
+    <DishCard dish={item} action={() => addToCart(item)} />
   );
 
   const toogleSelectedCategoty = (category: string): void => {

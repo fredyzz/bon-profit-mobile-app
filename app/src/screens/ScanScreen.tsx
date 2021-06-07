@@ -26,6 +26,10 @@ export const ScanScreen = () => {
     }
   }, [navigation, authState]);
 
+  useEffect(() => {
+    setIsScanning(true);
+  }, []);
+
   const onSuccess = ({data}: {data: string}) => {
     const {success, restaurantId, tableId}: Scan = validateQr(data);
     if (success) {
@@ -67,7 +71,7 @@ export const ScanScreen = () => {
             cameraStyle={styles.camera}
             onRead={onSuccess}
             reactivate={isScanning}
-            reactivateTimeout={1500}
+            reactivateTimeout={2000}
           />
         </View>
         <View style={styles.instructions}>

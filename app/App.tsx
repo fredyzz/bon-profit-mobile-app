@@ -8,13 +8,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {DrawerNavigator} from './src/navigator/DrawerNavigator';
 import {AuthProvider} from './src/store/context/AuthContext';
 import {RestaurantProvider} from './src/store/context/RestaurantContext';
+import {CartProvider} from './src/store/context/CartContext';
 
 const App = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
         <RestaurantProvider>
-          <DrawerNavigator />
+          <CartProvider>
+            <DrawerNavigator />
+          </CartProvider>
         </RestaurantProvider>
       </AuthProvider>
     </NavigationContainer>
