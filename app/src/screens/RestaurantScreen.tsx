@@ -30,7 +30,10 @@ interface RouteParams {
 export const RestaurantScreen = ({route}: any) => {
   const navigation: any = useNavigation();
   const {authState} = useContext(AuthContext);
-  const {cartState, addToCart} = useContext(CartContext);
+  const {
+    cartState: {cart},
+    addToCart,
+  } = useContext(CartContext);
   const {
     restaurantState: {restaurant},
     loadRestaurant,
@@ -52,8 +55,8 @@ export const RestaurantScreen = ({route}: any) => {
   }, [restaurantId, authState.token]);
 
   useEffect(() => {
-    console.log('CartState -----> ', cartState);
-  }, [cartState]);
+    console.log('CartState -----> ', JSON.stringify(cart));
+  }, [cart]);
   useEffect(() => {
     navigation.setOptions({
       navigationOptions: {
@@ -85,11 +88,15 @@ export const RestaurantScreen = ({route}: any) => {
         <TouchableOpacity
           style={[globalStyles.btnMenu, globalStyles.btnMenuRight]}
           onPress={() => navigation.toggleDrawer()}>
+          <View style={styles.btnCartTextContainer}>
+            <Text style={styles.btnCartText}>{cart.length}</Text>
+          </View>
+
           <Icon name="cart-outline" style={globalStyles.icon} />
         </TouchableOpacity>
       ),
     });
-  }, [navigation, restaurant]);
+  }, [navigation, restaurant, cart]);
 
   useEffect(() => {
     if (restaurant?.dishes) {
@@ -156,5 +163,21 @@ const styles = StyleSheet.create({
     color: Colors.resalt,
     marginTop: -0,
     fontSize: 32,
+  },
+  btnCartTextContainer: {
+    borderRadius: 100,
+    width: 24,
+    height: 24,
+    backgroundColor: Colors.dark,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -20,
+    marginBottom: -4,
+    marginLeft: 15,
+  },
+
+  btnCartText: {
+    color: Colors.primary,
+    fontSize: 12,
   },
 });
