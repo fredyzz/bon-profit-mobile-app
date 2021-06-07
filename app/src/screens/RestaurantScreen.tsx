@@ -86,8 +86,13 @@ export const RestaurantScreen = ({route}: any) => {
       ),
       headerRight: () => (
         <TouchableOpacity
-          style={[globalStyles.btnMenu, globalStyles.btnMenuRight]}
-          onPress={() => navigation.toggleDrawer()}>
+          style={[
+            globalStyles.btnMenu,
+            globalStyles.btnMenuRight,
+            !cart.length && globalStyles.buttonDisabled,
+          ]}
+          disabled={!cart.length}
+          onPress={() => navigation.navigate('CartScreen')}>
           <View style={styles.btnCartTextContainer}>
             <Text style={styles.btnCartText}>{cart.length}</Text>
           </View>

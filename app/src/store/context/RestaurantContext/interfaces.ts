@@ -9,6 +9,12 @@ export interface Dish {
   isActive: boolean;
 }
 
+export interface DishGroup {
+  id: string;
+  quantity: number;
+  dish: Dish;
+}
+
 export interface Order {
   userId: string;
   date: Date;

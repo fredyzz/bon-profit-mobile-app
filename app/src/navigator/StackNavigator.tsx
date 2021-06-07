@@ -2,11 +2,13 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ScanScreen} from '../screens/ScanScreen';
 import {RestaurantScreen} from '../screens/RestaurantScreen';
+import {CartScreen} from '../screens/CartScreen';
 import {Colors} from '../theme/colors';
 
 export type RootStackParams = {
   ScanScreen: undefined;
   RestaurantScreen: {restaurantId: string; tableId: string};
+  CartScreen: {restaurantId: string; tableId: string};
   PersonScreen: {id: number; name: string};
   Page3screen: undefined;
 };
@@ -63,6 +65,26 @@ export const StackNavigator = () => {
           },
         }}
         component={RestaurantScreen}
+      />
+      <Stack.Screen
+        name="CartScreen"
+        options={{
+          gestureEnabled: true,
+          title: '',
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            shadowRadius: 0,
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={CartScreen}
       />
     </Stack.Navigator>
   );
