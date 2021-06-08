@@ -3,11 +3,13 @@ import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 // import {AuthContext} from '../store/context/AuthContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {groupDishesById, calculateTotalAmount} from '../helpers/cart.helper';
-import {CartItemCard} from '../components/CartItemCard';
-import {globalStyles} from '../theme/appTheme';
-import {Colors} from '../theme/colors';
-import {CartContext} from '../store/context/CartContext';
+import {groupDishesById, calculateTotalAmount} from '../../helpers/cart.helper';
+import {CartItemCard} from '../../components/CartItemCard';
+import {globalStyles} from '../../theme/appTheme';
+import {Colors} from '../../theme/colors';
+import {CartContext} from '../../store/context/CartContext';
+import {AuthContext} from '../../store/context/AuthContext';
+import {saveOrder} from '../../services/cart';
 
 interface RouteParams {
   restaurantId: string;
@@ -16,12 +18,14 @@ interface RouteParams {
 
 export const CartScreen = () => {
   const navigation: any = useNavigation();
-  //   const {authState} = useContext(AuthContext);
   const {
     cartState: {cart},
     addToCart,
     removeOneFromCart,
   } = useContext(CartContext);
+  const {
+    authState: {token: userToken},
+  } = useContext(AuthContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -56,6 +60,13 @@ export const CartScreen = () => {
     }
   }, [cart, navigation]);
 
+  const sendOrder = async (cart: any, token: string = userToken) => {
+    const response = await saveOrder(token, cart);
+    if (response.success) {
+      navigation.navigate('OrdersScreen');
+    }
+  };
+
   const renderItem = ({item}: any) => (
     <CartItemCard
       dishGroup={item}
@@ -79,7 +90,9 @@ export const CartScreen = () => {
             <Text style={styles.totalText}>€ {calculateTotalAmount(cart)}</Text>
           </View>
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={[globalStyles.bigButton, styles.btnLogin]}>
+            <TouchableOpacity
+              style={[globalStyles.bigButton, styles.btnLogin]}
+              onPress={() => sendOrder(cart)}>
               <Text style={globalStyles.bigButtonText}>Confirm</Text>
             </TouchableOpacity>
           </View>

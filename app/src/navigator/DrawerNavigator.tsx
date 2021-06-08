@@ -17,6 +17,7 @@ import {LoginScreen} from '../screens/auth/LoginScreen';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {RegisterScreen} from '../screens/auth/RegisterScreen';
 import {SuccessScreen} from '../components/SuccessScreen';
+import {OrdersScreen} from '../screens/OrdersScreen';
 import {globalStyles} from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../store/context/AuthContext/';
@@ -49,6 +50,11 @@ export const DrawerNavigator = () => {
         name="SettingsScreen"
         options={{title: 'Settings'}}
         component={SettingsScreen}
+      />
+      <Drawer.Screen
+        name="OrdersScreen"
+        options={{title: 'Orders'}}
+        component={OrdersScreen}
       />
       <Drawer.Screen
         options={{
