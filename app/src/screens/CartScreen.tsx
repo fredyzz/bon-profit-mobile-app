@@ -3,7 +3,7 @@ import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 // import {AuthContext} from '../store/context/AuthContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {groupDishesById} from '../helpers/restaurant.helper';
+import {groupDishesById, calculateTotalAmount} from '../helpers/cart.helper';
 import {CartItemCard} from '../components/CartItemCard';
 import {globalStyles} from '../theme/appTheme';
 import {Colors} from '../theme/colors';
@@ -63,6 +63,9 @@ export const CartScreen = () => {
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
+          <View>
+            <Text>total: {calculateTotalAmount(cart)}</Text>
+          </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity style={[globalStyles.bigButton, styles.btnLogin]}>
               <Text style={globalStyles.bigButtonText}>Confirm</Text>
@@ -72,7 +75,7 @@ export const CartScreen = () => {
       </View>
     </View>
   ) : (
-    <Text>No hay restaurant</Text>
+    <Text>No products</Text>
   );
 };
 
