@@ -20,11 +20,19 @@ export const CartProvider = ({children}: {children: JSX.Element}) => {
     });
   };
 
+  const removeOneFromCart = (dishId: string) => {
+    dispatch({
+      type: 'removeOneFromCart',
+      dishId,
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartState,
         addToCart,
+        removeOneFromCart,
       }}>
       {children}
     </CartContext.Provider>

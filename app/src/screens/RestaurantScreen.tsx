@@ -55,9 +55,6 @@ export const RestaurantScreen = ({route}: any) => {
   }, [restaurantId, authState.token]);
 
   useEffect(() => {
-    console.log('CartState -----> ', JSON.stringify(cart));
-  }, [cart]);
-  useEffect(() => {
     navigation.setOptions({
       navigationOptions: {
         gesturesEnabled: false,

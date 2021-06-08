@@ -20,6 +20,7 @@ export const CartScreen = () => {
   const {
     cartState: {cart},
     addToCart,
+    removeOneFromCart,
   } = useContext(CartContext);
 
   useEffect(() => {
@@ -49,8 +50,18 @@ export const CartScreen = () => {
     });
   }, [navigation, cart]);
 
+  useEffect(() => {
+    if (!cart.length) {
+      navigation.goBack();
+    }
+  }, [cart, navigation]);
+
   const renderItem = ({item}: any) => (
-    <CartItemCard dishGroup={item} action={() => addToCart(item.dish)} />
+    <CartItemCard
+      dishGroup={item}
+      add={() => addToCart(item.dish)}
+      remove={() => removeOneFromCart(item.dish._id)}
+    />
   );
 
   return cart ? (
@@ -63,8 +74,9 @@ export const CartScreen = () => {
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
-          <View>
-            <Text>total: {calculateTotalAmount(cart)}</Text>
+          <View style={styles.totalContainer}>
+            <Text style={styles.totalText}>total:</Text>
+            <Text style={styles.totalText}>€ {calculateTotalAmount(cart)}</Text>
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity style={[globalStyles.bigButton, styles.btnLogin]}>
@@ -113,13 +125,23 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   btnContainer: {
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 50,
   },
   btnLogin: {backgroundColor: Colors.primary},
   btnCartText: {
     color: Colors.primary,
     fontSize: 12,
+  },
+  totalContainer: {
+    height: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  totalText: {
+    fontSize: 26,
+    color: Colors.dark,
   },
 });

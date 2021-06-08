@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {DishGroup} from '../store/context/RestaurantContext/interfaces';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,15 +8,12 @@ import {Colors} from '../theme/colors';
 
 interface Props {
   dishGroup: DishGroup;
-  action: () => void;
+  add: () => void;
+  remove: () => void;
 }
-export const CartItemCard = ({dishGroup, action}: Props) => {
+export const CartItemCard = ({dishGroup, add, remove}: Props) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{uri: dishGroup.dish.imagesHref[0]}}
-        style={styles.image}
-      />
       <View style={styles.dishData}>
         <Text
           style={
@@ -25,8 +22,18 @@ export const CartItemCard = ({dishGroup, action}: Props) => {
         <Text style={styles.category}>{dishGroup.dish.category}</Text>
         <Text style={styles.price}>€{dishGroup.dish.price}</Text>
       </View>
-      <View>
-        <TouchableOpacity style={styles.actionButton} onPress={action}>
+      <View style={styles.actionsContainer}>
+        <TouchableOpacity
+          style={[styles.actionButton, styles.actionButtonLeft]}
+          onPress={remove}>
+          <Icon
+            name="remove-outline"
+            style={[globalStyles.icon, styles.actionButtonText]}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionButton, styles.actionButtonRight]}
+          onPress={add}>
           <Icon
             name="add-outline"
             style={[globalStyles.icon, styles.actionButtonText]}
@@ -43,29 +50,19 @@ const styles = StyleSheet.create({
     marginTop: 14,
     marginLeft: 5,
     backgroundColor: Colors.white,
-    width: '96%',
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3.84,
-
-    elevation: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 100,
-    marginLeft: 11,
-    marginRight: 20,
+  actionsContainer: {
+    flexDirection: 'row',
+    paddingRight: 20,
   },
   dishData: {
+    marginLeft: 20,
     height: '100%',
     width: 160,
     justifyContent: 'center',
@@ -87,8 +84,8 @@ const styles = StyleSheet.create({
   actionButton: {
     width: 50,
     height: 50,
-    marginRight: 30,
-    borderRadius: 100,
+    marginRight: 0,
+
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.primary,
@@ -97,9 +94,19 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
+
     shadowOpacity: 0.2,
     shadowRadius: 3.84,
     elevation: 4,
+  },
+  actionButtonLeft: {
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+  },
+  actionButtonRight: {
+    marginLeft: 10,
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
   },
   actionButtonText: {color: Colors.white},
 });
