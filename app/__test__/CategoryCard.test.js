@@ -1,8 +1,7 @@
 import 'react-native';
 import React from 'react';
-import {fireEvent} from '@testing-library/react-native';
 import {CategoryCard} from '../src/components/CategoryCard';
-import {render} from '@testing-library/react-native';
+import {render, fireEvent} from '@testing-library/react-native';
 
 const mockedCategoriesProp = ['Italian'];
 const mockedCallBack = jest.fn();
