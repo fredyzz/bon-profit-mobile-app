@@ -9,6 +9,7 @@ import {DrawerNavigator} from './src/navigator/DrawerNavigator';
 import {AuthProvider} from './src/store/context/AuthContext';
 import {RestaurantProvider} from './src/store/context/RestaurantContext';
 import {CartProvider} from './src/store/context/CartContext';
+import {OrdersProvider} from './src/store/context/OrdersContext';
 
 const App = () => {
   return (
@@ -16,7 +17,9 @@ const App = () => {
       <AuthProvider>
         <RestaurantProvider>
           <CartProvider>
-            <DrawerNavigator />
+            <OrdersProvider>
+              <DrawerNavigator />
+            </OrdersProvider>
           </CartProvider>
         </RestaurantProvider>
       </AuthProvider>

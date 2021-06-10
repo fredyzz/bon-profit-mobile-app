@@ -3,13 +3,13 @@ import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 // import {AuthContext} from '../store/context/AuthContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {groupDishesById, calculateTotalAmount} from '../../helpers/cart.helper';
-import {CartItemCard} from '../../components/CartItemCard';
+import {OrderCard} from '../../components/OrderCard';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 import {CartContext} from '../../store/context/CartContext';
 import {AuthContext} from '../../store/context/AuthContext';
 import {getAllOrders} from '../../services/orders';
+import {OrdersContext} from '../../store/context/OrdersContext';
 
 interface RouteParams {
   restaurantId: string;
@@ -20,12 +20,11 @@ export const OrdersScreen = () => {
   const navigation: any = useNavigation();
   const {
     cartState: {cart},
-    addToCart,
-    removeOneFromCart,
   } = useContext(CartContext);
   const {
     authState: {token: userToken},
   } = useContext(AuthContext);
+  const {ordersState, loadOrders} = useContext(OrdersContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -57,32 +56,26 @@ export const OrdersScreen = () => {
   useEffect(() => {
     const getOrders = async () => {
       const orders = await getAllOrders(userToken);
-      console.log(JSON.stringify(orders, null, 4));
+      loadOrders(orders);
     };
     getOrders();
-  }, [userToken]);
+    console.log(ordersState);
+  }, []);
 
-  const renderItem = ({item}: any) => (
-    <CartItemCard
-      dishGroup={item}
-      add={() => addToCart(item.dish)}
-      remove={() => removeOneFromCart(item.dish._id)}
-    />
-  );
+  const renderItem = ({item}: any) => <OrderCard order={item} />;
 
-  return cart ? (
+  return ordersState.orders ? (
     <View style={globalStyles.frameContainer}>
       <View style={globalStyles.frame}>
         <View style={styles.container}>
           <Text style={globalStyles.title}>Orders</Text>
           <FlatList
-            data={groupDishesById(cart)}
+            data={ordersState.orders}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item._id}
           />
           <View style={styles.totalContainer}>
             <Text style={styles.totalText}>total:</Text>
-            <Text style={styles.totalText}>€ {calculateTotalAmount(cart)}</Text>
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity style={[globalStyles.bigButton, styles.btnLogin]}>

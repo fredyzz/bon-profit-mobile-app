@@ -7,9 +7,12 @@ import {
   View,
   Image,
   TouchableOpacity,
-  SafeAreaView,
   TextInput,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
@@ -65,54 +68,67 @@ export const LoginScreen = ({navigation}: Props) => {
   };
 
   return (
-    <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-      <Image
-        style={styles.logo}
-        source={require('../../images/BonProfit-color.png')}
-      />
-      <Text style={[globalStyles.title]}>Bon Profit</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={globalStyles.input}
-          placeholder="email"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setEmail(value)}
-          value={email}
-        />
-        <TextInput
-          style={globalStyles.input}
-          secureTextEntry={true}
-          placeholder="password"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setPassword(value)}
-          value={password}
-        />
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={[globalStyles.bigButton, styles.btnLogin]}
-          onPress={handleLogin}>
-          <Text style={globalStyles.bigButtonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={[globalStyles.textButtonContainer]}
-          onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={globalStyles.textButton}>
-            ¿Not registered yet? Click here to register
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      style={[globalStyles.globalMargin, styles.container]}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.innerContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../../images/BonProfit-color.png')}
+          />
+          <Text style={[globalStyles.title]}>Bon Profit</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={globalStyles.input}
+              placeholder="email"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setEmail(value)}
+              value={email}
+            />
+            <TextInput
+              style={globalStyles.input}
+              secureTextEntry={true}
+              placeholder="password"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setPassword(value)}
+              value={password}
+            />
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={[globalStyles.bigButton, styles.btnLogin]}
+              onPress={handleLogin}>
+              <Text style={globalStyles.bigButtonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={[globalStyles.textButtonContainer]}
+              onPress={() => navigation.navigate('RegisterScreen')}>
+              <Text style={globalStyles.textButton}>
+                ¿Not registered yet? Click here to register
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  container: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
   logo: {
-    width: 200,
-    height: 200,
+    height: '20%',
     resizeMode: 'contain',
   },
   btnContainer: {

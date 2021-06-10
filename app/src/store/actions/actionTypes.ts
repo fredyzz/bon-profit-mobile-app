@@ -1,4 +1,4 @@
-import {Dish, Restaurant} from '../context/RestaurantContext/interfaces';
+import {Dish, Order, Restaurant} from '../context/RestaurantContext/interfaces';
 
 export type authAction = {type: 'signIn'; data: {}} | {type: 'signOut'};
 
@@ -9,4 +9,9 @@ export type cartActions =
 export type restaurantAction = {
   type: 'loadRestaurant';
   restaurant: Restaurant;
+};
+
+export type ordersAction = {
+  type: 'loadOrders';
+  orders: Array<Order>;
 };

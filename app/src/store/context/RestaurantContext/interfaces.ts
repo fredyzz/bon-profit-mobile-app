@@ -15,15 +15,6 @@ export interface DishGroup {
   dish: Dish;
 }
 
-export interface Order {
-  userId: string;
-  date: Date;
-  dishes: Array<Dish>;
-  isDelivered: boolean;
-  isPaid: boolean;
-  imageUrl: string;
-}
-
 export interface Restaurant {
   name: string;
   password: string;
