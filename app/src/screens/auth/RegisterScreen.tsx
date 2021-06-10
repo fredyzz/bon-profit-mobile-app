@@ -8,9 +8,12 @@ import {
   View,
   Image,
   TouchableOpacity,
-  SafeAreaView,
+  Keyboard,
   TextInput,
   Alert,
+  Platform,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
@@ -75,88 +78,101 @@ export const RegisterScreen = ({navigation}: Props) => {
   };
 
   return (
-    <SafeAreaView style={[globalStyles.globalMargin, styles.container]}>
-      <Image
-        style={styles.logo}
-        source={require('../../images/BonProfit-color.png')}
-      />
-      <Text style={[globalStyles.title]}>Register</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={globalStyles.input}
-          placeholder="name"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setName(value)}
-          value={name}
-        />
-        <TextInput
-          style={globalStyles.input}
-          placeholder="lastname"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setLastName(value)}
-          value={lastname}
-        />
-        <TextInput
-          style={globalStyles.input}
-          placeholder="phone"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setPhone(value)}
-          value={phone}
-        />
-        <TextInput
-          style={globalStyles.input}
-          placeholder="email"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setEmail(value.toLowerCase())}
-          value={email}
-        />
-        <TextInput
-          style={globalStyles.input}
-          secureTextEntry={true}
-          placeholder="password"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setPassword(value)}
-          value={password}
-        />
-        <TextInput
-          style={globalStyles.input}
-          secureTextEntry={true}
-          placeholder="repeat password"
-          placeholderTextColor={Colors.primary}
-          onChangeText={value => setPasswordRepeat(value)}
-          value={passwordRepeat}
-        />
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          disabled={registerButttonDisabled}
-          style={[
-            globalStyles.bigButton,
-            styles.btnLogin,
-            registerButttonDisabled && globalStyles.buttonDisabled,
-          ]}
-          onPress={handleRegister}>
-          <Text style={globalStyles.bigButtonText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={[globalStyles.textButtonContainer]}
-          onPress={() => navigation.navigate('LoginScreen')}>
-          <Text style={globalStyles.textButton}>
-            ¿Registered yet? Click here to login
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      style={[globalStyles.globalMargin, styles.container]}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.innerContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../../images/BonProfit-color.png')}
+          />
+          <Text style={[globalStyles.title]}>Register</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={globalStyles.input}
+              placeholder="name"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setName(value)}
+              value={name}
+            />
+            <TextInput
+              style={globalStyles.input}
+              placeholder="lastname"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setLastName(value)}
+              value={lastname}
+            />
+            <TextInput
+              style={globalStyles.input}
+              placeholder="phone"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setPhone(value)}
+              value={phone}
+            />
+            <TextInput
+              style={globalStyles.input}
+              placeholder="email"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setEmail(value.toLowerCase())}
+              value={email}
+            />
+            <TextInput
+              style={globalStyles.input}
+              secureTextEntry={true}
+              placeholder="password"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setPassword(value)}
+              value={password}
+            />
+            <TextInput
+              style={globalStyles.input}
+              secureTextEntry={true}
+              placeholder="repeat password"
+              placeholderTextColor={Colors.primary}
+              onChangeText={value => setPasswordRepeat(value)}
+              value={passwordRepeat}
+            />
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              disabled={registerButttonDisabled}
+              style={[
+                globalStyles.bigButton,
+                styles.btnLogin,
+                registerButttonDisabled && globalStyles.buttonDisabled,
+              ]}
+              onPress={handleRegister}>
+              <Text style={globalStyles.bigButtonText}>Register</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={[globalStyles.textButtonContainer]}
+              onPress={() => navigation.navigate('LoginScreen')}>
+              <Text style={globalStyles.textButton}>
+                ¿Registered yet? Click here to login
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, alignItems: 'center'},
+  container: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
   logo: {
-    width: 100,
-    height: 100,
+    height: '10%',
     marginTop: 30,
     resizeMode: 'contain',
   },
