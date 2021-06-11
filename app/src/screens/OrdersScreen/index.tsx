@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
-// import {AuthContext} from '../store/context/AuthContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {OrderCard} from '../../components/OrderCard';
 import {globalStyles} from '../../theme/appTheme';
@@ -21,10 +21,22 @@ export const OrdersScreen = () => {
   const {
     cartState: {cart},
   } = useContext(CartContext);
-  const {
-    authState: {token: userToken},
-  } = useContext(AuthContext);
+  const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
+
+  useEffect(() => {
+    if (!authState.isLoggedIn) {
+      navigation.navigate('LoginScren');
+    }
+  }, []);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      const orders = await getAllOrders(authState.token);
+      loadOrders(orders);
+    };
+    getOrders();
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -52,15 +64,6 @@ export const OrdersScreen = () => {
       ),
     });
   }, [navigation, cart]);
-
-  useEffect(() => {
-    const getOrders = async () => {
-      const orders = await getAllOrders(userToken);
-      loadOrders(orders);
-    };
-    getOrders();
-    console.log(ordersState);
-  }, []);
 
   const renderItem = ({item}: any) => <OrderCard order={item} />;
 
