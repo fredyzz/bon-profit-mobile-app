@@ -7,7 +7,6 @@ export const useAuth = () => {
   const navigation = useNavigation();
   useEffect(() => {
     if (!authState.isLoggedIn) {
-      console.log('me voy');
       navigation.navigate('LoginScreen');
     }
   }, [authState, navigation]);

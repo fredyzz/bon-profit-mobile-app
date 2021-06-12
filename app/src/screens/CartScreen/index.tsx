@@ -7,8 +7,8 @@ import {CartItemCard} from '../../components/CartItemCard';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 import {CartContext} from '../../store/context/CartContext';
-import {AuthContext} from '../../store/context/AuthContext';
 import {saveOrder} from '../../services/cart';
+import {useAuth} from '../../hooks/UseAuth';
 
 interface RouteParams {
   restaurantId: string;
@@ -16,6 +16,7 @@ interface RouteParams {
 }
 
 export const CartScreen = () => {
+  const {token: userToken} = useAuth();
   const navigation: any = useNavigation();
   const {
     cartState: {cart},
@@ -23,9 +24,6 @@ export const CartScreen = () => {
     removeOneFromCart,
     removeAllFromCart,
   } = useContext(CartContext);
-  const {
-    authState: {token: userToken},
-  } = useContext(AuthContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -38,11 +36,6 @@ export const CartScreen = () => {
           onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" style={globalStyles.icon} />
         </TouchableOpacity>
-      ),
-      headerTitle: () => (
-        <View style={styles.headerTitle}>
-          <Text style={[globalStyles.title, styles.title]}>Cart</Text>
-        </View>
       ),
       headerRight: () => (
         <TouchableOpacity
@@ -60,8 +53,8 @@ export const CartScreen = () => {
     }
   }, [cart, navigation]);
 
-  const sendOrder = async (cart: any, token: string = userToken) => {
-    const response = await saveOrder(token, cart);
+  const sendOrder = async (cartToSave: any, token: string = userToken) => {
+    const response = await saveOrder(token, cartToSave);
     if (response.success) {
       removeAllFromCart();
       navigation.navigate('OrdersScreen');
