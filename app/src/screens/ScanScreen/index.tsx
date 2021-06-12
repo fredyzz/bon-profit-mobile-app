@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import {validateQr, Scan} from '../helpers/qr.validator';
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,22 +8,18 @@ import {
   Image,
   Alert,
 } from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {AuthContext} from '../store/context/AuthContext/';
-import {globalStyles} from '../theme/appTheme';
-import {Colors} from '../theme/colors';
-import {useIsFocused} from '@react-navigation/native';
+import {useAuth} from '../../hooks/UseAuth';
+import {validateQr, Scan} from '../../helpers/qr.validator';
+import {globalStyles} from '../../theme/appTheme';
+import {Colors} from '../../theme/colors';
 
 export const ScanScreen = () => {
-  const {authState} = useContext(AuthContext);
+  useAuth();
   const navigation: any = useNavigation();
   const isFocused = useIsFocused();
-  useEffect(() => {
-    if (!authState.isLoggedIn) {
-      navigation.navigate('LoginScreen');
-    }
-  }, [navigation, authState]);
 
   const onSuccess = ({data}: {data: string}) => {
     const {success, restaurantId, tableId}: Scan = validateQr(data);
@@ -55,7 +50,7 @@ export const ScanScreen = () => {
       <View style={globalStyles.frame}>
         <Image
           style={styles.logo}
-          source={require('../images/BonProfit-color.png')}
+          source={require('../../images/BonProfit-color.png')}
         />
         <View style={styles.scanner}>
           {isFocused && (
