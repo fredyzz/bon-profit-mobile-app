@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext, useState} from 'react';
 import {
@@ -8,19 +9,19 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {AuthContext} from '../store/context/AuthContext';
-import {RestaurantContext} from '../store/context/RestaurantContext';
-import {getRestaurantById} from '../services/restaurant';
+import {RestaurantContext} from '../../store/context/RestaurantContext';
+import {getRestaurantById} from '../../services/restaurant';
+import {CartContext} from '../../store/context/CartContext';
+import {useAuth} from '../../hooks/UseAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {DishCard} from '../components/DishCard';
-import {globalStyles} from '../theme/appTheme';
-import {Colors} from '../theme/colors';
+import {CategoriesSlider} from '../../components/CategoriesSlider';
+import {DishCard} from '../../components/DishCard';
+import {globalStyles} from '../../theme/appTheme';
+import {Colors} from '../../theme/colors';
 import {
   getDishCategories,
   filterDishByCategory,
-} from '../helpers/restaurant.helper';
-import {CategoriesSlider} from '../components/CategoriesSlider';
-import {CartContext} from '../store/context/CartContext';
+} from '../../helpers/restaurant.helper';
 
 interface RouteParams {
   restaurantId: string;
@@ -29,7 +30,7 @@ interface RouteParams {
 
 export const RestaurantScreen = ({route}: any) => {
   const navigation: any = useNavigation();
-  const {authState} = useContext(AuthContext);
+  const {token} = useAuth();
   const {
     cartState: {cart},
     addToCart,
@@ -44,15 +45,11 @@ export const RestaurantScreen = ({route}: any) => {
 
   useEffect(() => {
     async function getRestaurant(): Promise<void> {
-      const restaurantFromApi = await getRestaurantById(
-        restaurantId,
-        authState.token,
-      );
+      const restaurantFromApi = await getRestaurantById(restaurantId, token);
       loadRestaurant(restaurantFromApi);
     }
     getRestaurant();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [restaurantId, authState.token]);
+  }, [restaurantId, token]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -73,7 +70,7 @@ export const RestaurantScreen = ({route}: any) => {
             source={
               restaurant?.avatarUrl
                 ? {uri: restaurant?.avatarUrl}
-                : require('../images/avatar-placeholder.png')
+                : require('../../images/avatar-placeholder.png')
             }
           />
           <Text style={[globalStyles.title, styles.title]}>
@@ -140,7 +137,7 @@ export const RestaurantScreen = ({route}: any) => {
       </View>
     </View>
   ) : (
-    <Text>No hay restaurant</Text>
+    <Text>Restaurant not found</Text>
   );
 };
 
