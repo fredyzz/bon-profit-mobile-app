@@ -14,12 +14,7 @@ export const saveOrder = async (
     headers: {Authorization: `Bearer ${token}`},
   };
   try {
-    const {data} = await axios.post(
-      env.ENDPOINTS.ORDERS_URL,
-      {dishes: cart},
-      config,
-    );
-    console.log('newOrder', data);
+    await axios.post(env.ENDPOINTS.ORDERS_URL, {dishes: cart}, config);
     return {
       success: true,
     };
