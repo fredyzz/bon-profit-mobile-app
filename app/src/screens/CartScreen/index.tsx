@@ -1,7 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
-// import {AuthContext} from '../store/context/AuthContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {groupDishesById, calculateTotalAmount} from '../../helpers/cart.helper';
 import {CartItemCard} from '../../components/CartItemCard';
@@ -22,6 +21,7 @@ export const CartScreen = () => {
     cartState: {cart},
     addToCart,
     removeOneFromCart,
+    removeAllFromCart,
   } = useContext(CartContext);
   const {
     authState: {token: userToken},
@@ -63,6 +63,7 @@ export const CartScreen = () => {
   const sendOrder = async (cart: any, token: string = userToken) => {
     const response = await saveOrder(token, cart);
     if (response.success) {
+      removeAllFromCart();
       navigation.navigate('OrdersScreen');
     }
   };

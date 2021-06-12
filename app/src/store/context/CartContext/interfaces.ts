@@ -8,4 +8,5 @@ export interface CartContextProps {
   cartState: CartState;
   addToCart: (dish: Dish) => void;
   removeOneFromCart: (dishId: string) => void;
+  removeAllFromCart: () => void;
 }

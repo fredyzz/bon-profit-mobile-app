@@ -114,11 +114,7 @@ export const OrdersScreen = () => {
             tabBarButton: () => (
               <TouchableOpacity
                 style={styles.btnTabContainer}
-                onPress={() =>
-                  navigation.navigate('StackNavigator', {
-                    screen: 'RestaurantScreen',
-                  })
-                }>
+                onPress={() => navigation.navigate('StackNavigator')}>
                 <View style={styles.btnTab}>
                   <Text style={styles.btnTabText}>New Order</Text>
                 </View>

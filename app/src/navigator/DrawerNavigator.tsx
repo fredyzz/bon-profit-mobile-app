@@ -33,12 +33,18 @@ export const DrawerNavigator = () => {
       drawerContent={props => <DrawerContent {...props} />}>
       <Drawer.Screen
         name="LoginScreen"
-        options={{title: 'Login'}}
+        options={{
+          title: 'Login',
+          gestureEnabled: false,
+        }}
         component={LoginScreen}
       />
       <Drawer.Screen
         name="RegisterScreen"
-        options={{title: 'Register'}}
+        options={{
+          title: 'Register',
+          gestureEnabled: false,
+        }}
         component={RegisterScreen}
       />
       <Drawer.Screen
@@ -88,6 +94,14 @@ const DrawerContent = ({
           <View style={globalStyles.menuItem}>
             <Icon name="qr-code-outline" style={globalStyles.icon} />
             <Text style={globalStyles.menuItemText}>Menu</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('OrdersScreen')}
+          style={globalStyles.drawerMenuItem}>
+          <View style={globalStyles.menuItem}>
+            <Icon name="fast-food-outline" style={globalStyles.icon} />
+            <Text style={globalStyles.menuItemText}>Orders</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity

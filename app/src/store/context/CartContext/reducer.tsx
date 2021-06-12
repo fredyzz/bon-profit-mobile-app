@@ -18,6 +18,11 @@ export function cartReducer(
       return {
         cart: updatedCart,
       };
+
+    case 'removeAllFromCart':
+      return {
+        cart: [],
+      };
     default:
       return state;
   }

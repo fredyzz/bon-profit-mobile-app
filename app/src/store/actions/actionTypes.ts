@@ -1,10 +1,12 @@
-import {Dish, Order, Restaurant} from '../context/RestaurantContext/interfaces';
+import {Order} from '../context/OrdersContext/interfaces';
+import {Dish, Restaurant} from '../context/RestaurantContext/interfaces';
 
 export type authAction = {type: 'signIn'; data: {}} | {type: 'signOut'};
 
 export type cartActions =
   | {type: 'addToCart'; dish: Dish}
-  | {type: 'removeOneFromCart'; dishId: string};
+  | {type: 'removeOneFromCart'; dishId: string}
+  | {type: 'removeAllFromCart'};
 
 export type restaurantAction = {
   type: 'loadRestaurant';

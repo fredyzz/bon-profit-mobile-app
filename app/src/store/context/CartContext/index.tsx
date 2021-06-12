@@ -27,12 +27,19 @@ export const CartProvider = ({children}: {children: JSX.Element}) => {
     });
   };
 
+  const removeAllFromCart = () => {
+    dispatch({
+      type: 'removeAllFromCart',
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartState,
         addToCart,
         removeOneFromCart,
+        removeAllFromCart,
       }}>
       {children}
     </CartContext.Provider>
