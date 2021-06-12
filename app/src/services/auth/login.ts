@@ -18,7 +18,8 @@ export const clearStorage = async (): Promise<boolean> => {
     await AsyncStorage.removeItem(env.CONSTANTS.STORAGE_KEY);
     return true;
   } catch (e) {
-    return e;
+    console.log(e);
+    return false;
   }
 };
 

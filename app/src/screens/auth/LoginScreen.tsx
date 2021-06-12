@@ -63,18 +63,6 @@ export const LoginScreen = ({navigation}: Props) => {
     setEmail('');
     setPassword('');
   };
-  useEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <TouchableOpacity
-          testID="login-btnMenu"
-          style={styles.btnMenu}
-          onPress={() => navigation.toggleDrawer()}>
-          <Text>Menu</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
 
   useEffect(() => {
     if (authState.isLoggedIn) {
