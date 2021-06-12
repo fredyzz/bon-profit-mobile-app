@@ -12,6 +12,7 @@ import {OrdersContext} from '../../store/context/OrdersContext';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {ActiveOrders} from './ActiveOrders';
+import {useFocusEffect} from '@react-navigation/native';
 
 interface RouteParams {
   restaurantId: string;
@@ -32,13 +33,15 @@ export const OrdersScreen = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const getOrders = async () => {
-      const orders = await getAllOrders(authState.token);
-      loadOrders(orders);
-    };
-    getOrders();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const getOrders = async () => {
+        const orders = await getAllOrders(authState.token);
+        loadOrders(orders);
+      };
+      getOrders();
+    }, []),
+  );
 
   useEffect(() => {
     navigation.setOptions({

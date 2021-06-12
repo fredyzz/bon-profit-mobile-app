@@ -10,6 +10,7 @@ import {CartContext} from '../../store/context/CartContext';
 import {AuthContext} from '../../store/context/AuthContext';
 import {getAllOrders} from '../../services/orders';
 import {OrdersContext} from '../../store/context/OrdersContext';
+import {useFocusEffect} from '@react-navigation/native';
 
 interface RouteParams {
   restaurantId: string;
@@ -30,13 +31,15 @@ export const ActiveOrders = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const getOrders = async () => {
-      const orders = await getAllOrders(authState.token);
-      loadOrders(orders);
-    };
-    getOrders();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const getOrders = async () => {
+        const orders = await getAllOrders(authState.token);
+        loadOrders(orders);
+      };
+      getOrders();
+    }, []),
+  );
 
   useEffect(() => {
     navigation.setOptions({
@@ -77,14 +80,6 @@ export const ActiveOrders = () => {
             renderItem={renderItem}
             keyExtractor={item => item._id}
           />
-          <View style={styles.totalContainer}>
-            <Text style={styles.totalText}>total:</Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity style={[globalStyles.bigButton, styles.btnLogin]}>
-              <Text style={globalStyles.bigButtonText}>Confirm</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </View>
@@ -100,7 +95,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    width: '100%',
     paddingTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     width: 140,
@@ -135,15 +133,5 @@ const styles = StyleSheet.create({
   btnCartText: {
     color: Colors.primary,
     fontSize: 12,
-  },
-  totalContainer: {
-    height: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  totalText: {
-    fontSize: 26,
-    color: Colors.dark,
   },
 });
