@@ -39,9 +39,7 @@ export const OrderCard = ({order}: Props) => {
         <Text style={styles.title}>
           Waiting estimated time: {getLongestTime(order.dishes)}
         </Text>
-        <Text style={styles.title}>
-          isDelivered: {order.isDelivered.toString()}
-        </Text>
+        <Text style={styles.stateText}>Waiting for delivery</Text>
       </View>
       <View />
     </View>
@@ -79,6 +77,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.primary,
+    fontSize: 18,
+    letterSpacing: 1,
+  },
+  stateText: {
+    marginTop: 14,
+    color: Colors.dark,
     fontSize: 18,
     letterSpacing: 1,
   },
