@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {CartContext} from '../../store/context/CartContext';
+import {OrdersContext} from '../../store/context/OrdersContext';
+import {useAuth} from '../../hooks/UseAuth';
+import {Order} from '../../store/context/OrdersContext/interfaces';
+import {fiterOrdersByDeliveredState} from '../../helpers/order.helper';
+import {getAllOrders} from '../../services/orders';
 import {OrderCard} from '../../components/OrderCard';
 import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
-import {CartContext} from '../../store/context/CartContext';
-import {AuthContext} from '../../store/context/AuthContext';
-import {getAllOrders} from '../../services/orders';
-import {OrdersContext} from '../../store/context/OrdersContext';
-import {useFocusEffect} from '@react-navigation/native';
-import {Order} from '../../store/context/OrdersContext/interfaces';
-import {fiterOrdersByDeliveredState} from '../../helpers/order.helper';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {useRoute} from '@react-navigation/native';
 
 interface RouteParams {
   restaurantId: string;
@@ -25,12 +25,12 @@ interface StateProperties {
 }
 
 export const OrdersTab = () => {
+  const {token} = useAuth();
   const navigation: any = useNavigation();
   const {name: routeName} = useRoute();
   const {
     cartState: {cart},
   } = useContext(CartContext);
-  const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
   const [filteredOrders, setFilteredOrders] = useState<Array<Order>>([]);
 
@@ -44,16 +44,10 @@ export const OrdersTab = () => {
   };
 
   const getOrders = async (callback: any) => {
-    const orders = await getAllOrders(authState.token);
+    const orders = await getAllOrders(token);
     loadOrders(orders);
     callback();
   };
-
-  useEffect(() => {
-    if (!authState.isLoggedIn) {
-      navigation.navigate('LoginScren');
-    }
-  }, []);
 
   useFocusEffect(
     React.useCallback(() => {

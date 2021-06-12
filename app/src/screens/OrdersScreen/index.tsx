@@ -5,13 +5,13 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../theme/colors';
 import {CartContext} from '../../store/context/CartContext';
-import {AuthContext} from '../../store/context/AuthContext';
 import {getAllOrders} from '../../services/orders';
 import {OrdersContext} from '../../store/context/OrdersContext';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {OrdersTab} from './OrdersTab';
 import {useFocusEffect} from '@react-navigation/native';
+import {useAuth} from '../../hooks/UseAuth';
 
 interface RouteParams {
   restaurantId: string;
@@ -19,23 +19,17 @@ interface RouteParams {
 }
 
 export const OrdersScreen = () => {
+  const {token} = useAuth();
   const navigation: any = useNavigation();
   const {
     cartState: {cart},
   } = useContext(CartContext);
-  const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
-
-  useEffect(() => {
-    if (!authState.isLoggedIn) {
-      navigation.navigate('LoginScreen');
-    }
-  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
       const getOrders = async () => {
-        const orders = await getAllOrders(authState.token);
+        const orders = await getAllOrders(token);
         loadOrders(orders);
       };
       getOrders();
