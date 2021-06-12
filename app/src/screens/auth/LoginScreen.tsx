@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../../store/context/AuthContext';
@@ -18,6 +19,10 @@ import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 import {login} from '../../services/auth/login';
 import {validateLoginForm} from '../../helpers/login.validator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {env} from '../../../.env';
+
+const STORAGE_KEY = env.CONSTANTS.STORAGE_KEY;
 
 interface Props extends DrawerScreenProps<any, any> {}
 
@@ -25,7 +30,39 @@ export const LoginScreen = ({navigation}: Props) => {
   const {authState, signIn} = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
 
+  const saveToken = async (value: string) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, value);
+    } catch (e) {
+      Alert.alert('Failed to save the data to the storage');
+    }
+  };
+
+  const readToken = async () => {
+    try {
+      const storageToken = await AsyncStorage.getItem(STORAGE_KEY);
+
+      if (storageToken !== null) {
+        setToken(storageToken);
+      }
+    } catch (e) {
+      Alert.alert('Failed to fetch the data from storage');
+    }
+  };
+
+  const loginWithToken = async () => {
+    if (token) {
+      const loginResult = await login(undefined, undefined, token);
+      signIn(loginResult);
+    }
+  };
+
+  const clearForm = () => {
+    setEmail('');
+    setPassword('');
+  };
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -42,8 +79,14 @@ export const LoginScreen = ({navigation}: Props) => {
   useEffect(() => {
     if (authState.isLoggedIn) {
       navigation.navigate('SuccessScreen');
+    } else {
+      readToken();
     }
-  }, [authState, navigation]);
+  }, [authState]);
+
+  useEffect(() => {
+    loginWithToken();
+  }, [token]);
 
   const handleLogin = async () => {
     const {isValid, message} = validateLoginForm({
@@ -57,8 +100,10 @@ export const LoginScreen = ({navigation}: Props) => {
         success,
         message: errorMessage,
         ...loginResult
-      } = await login(email, password);
-      if (success) {
+      } = await login(email, password, token);
+      if (success && loginResult.token) {
+        clearForm();
+        saveToken(loginResult.token);
         signIn(loginResult);
       }
       if (!success) {
@@ -83,7 +128,7 @@ export const LoginScreen = ({navigation}: Props) => {
               style={globalStyles.input}
               placeholder="email"
               placeholderTextColor={Colors.primary}
-              onChangeText={value => setEmail(value)}
+              onChangeText={value => setEmail(value.toLowerCase())}
               value={email}
             />
             <TextInput

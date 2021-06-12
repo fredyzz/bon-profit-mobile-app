@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {env} from '../../../.env.js';
 interface loginFormResponse {
   success: boolean;
@@ -12,24 +13,39 @@ interface loginFormResponse {
   };
 }
 
+export const clearStorage = async (): Promise<boolean> => {
+  try {
+    await AsyncStorage.removeItem(env.CONSTANTS.STORAGE_KEY);
+    return true;
+  } catch (e) {
+    return e;
+  }
+};
+
 export async function login(
-  email: String,
-  password: String,
+  email?: String,
+  password?: String,
+  storageToken?: string,
 ): Promise<loginFormResponse> {
   const LOGIN_URL = env.ENDPOINTS.LOGIN_URL;
   const USER_URL = env.ENDPOINTS.USER_URL;
+  let TOKEN = storageToken;
+  let REFRESH_TOKEN = '';
 
   try {
-    const {
-      data: {token, refreshToken},
-    }: any = await axios.post(LOGIN_URL, {
-      email,
-      password,
-    });
+    if (!storageToken) {
+      const {data}: any = await axios.post(LOGIN_URL, {
+        email,
+        password,
+      });
 
-    if (token) {
+      TOKEN = data.token;
+      REFRESH_TOKEN = data.refreshToken;
+    }
+
+    if (TOKEN) {
       const config: any = {
-        headers: {Authorization: `Bearer ${token}`},
+        headers: {Authorization: `Bearer ${TOKEN}`},
       };
 
       const {
@@ -39,8 +55,8 @@ export async function login(
       return {
         success: true,
         message: 'Logged succesfully',
-        token,
-        refreshToken,
+        token: TOKEN,
+        refreshToken: REFRESH_TOKEN,
         user: {
           name: user.name,
           lastname: user.lastname,

@@ -12,5 +12,5 @@ export interface AuthState {
 export interface AuthContextProps {
   authState: AuthState;
   signIn: (updatedState: any) => void;
-  signOut: (updatedState: any) => void;
+  signOut: () => void;
 }

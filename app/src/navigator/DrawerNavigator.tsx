@@ -21,6 +21,7 @@ import {OrdersScreen} from '../screens/OrdersScreen';
 import {globalStyles} from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../store/context/AuthContext/';
+import {clearStorage} from '../services/auth/login';
 
 const Drawer = createDrawerNavigator();
 
@@ -78,6 +79,14 @@ const DrawerContent = ({
   navigation,
 }: DrawerContentComponentProps<DrawerContentOptions>) => {
   const {signOut} = useContext(AuthContext);
+
+  const logOut = async () => {
+    const clearStorageSuccess = await clearStorage();
+    if (clearStorageSuccess) {
+      signOut();
+    }
+  };
+
   return (
     <DrawerContentScrollView>
       <View>
@@ -112,7 +121,7 @@ const DrawerContent = ({
             <Text style={globalStyles.menuItemText}>Settings</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={globalStyles.drawerMenuItem} onPress={signOut}>
+        <TouchableOpacity style={globalStyles.drawerMenuItem} onPress={logOut}>
           <View style={globalStyles.menuItem}>
             <Icon name="log-out-outline" style={globalStyles.icon} />
             <Text style={globalStyles.menuItemText}>Logout</Text>

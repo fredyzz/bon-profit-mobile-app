@@ -34,10 +34,17 @@ export const RegisterScreen = ({navigation}: Props) => {
 
   const {authState} = useContext(AuthContext);
 
+  const clearForm = () => {
+    setName('');
+    setLastName('');
+    setPhone('');
+    setEmail('');
+    setPassword('');
+    setPasswordRepeat('');
+  };
+
   useEffect(() => {
-    if (!authState.isLoggedIn) {
-      console.log('No esta logeado');
-    } else {
+    if (authState.isLoggedIn) {
       navigation.navigate('StackNavigator');
     }
   }, [authState, navigation]);
@@ -70,6 +77,7 @@ export const RegisterScreen = ({navigation}: Props) => {
         password,
       });
       if (success) {
+        clearForm();
         navigation.navigate('SuccessScreen');
       } else {
         Alert.alert('Something went wrong', registerMessage);
