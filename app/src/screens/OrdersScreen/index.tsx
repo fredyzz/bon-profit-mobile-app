@@ -10,8 +10,7 @@ import {getAllOrders} from '../../services/orders';
 import {OrdersContext} from '../../store/context/OrdersContext';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import {ActiveOrders} from './ActiveOrders';
-import {FinishedOrders} from './FinishedOrders';
+import {OrdersTab} from './OrdersTab';
 import {useFocusEffect} from '@react-navigation/native';
 
 interface RouteParams {
@@ -79,11 +78,11 @@ export const OrdersScreen = () => {
           activeTintColor: Colors.primary,
           inactiveTintColor: Colors.dark,
         }}>
-        <Tab.Screen name="Active" component={ActiveOrders} />
-        <Tab.Screen name="Delivered" component={FinishedOrders} />
+        <Tab.Screen name="Active" component={OrdersTab} />
+        <Tab.Screen name="Delivered" component={OrdersTab} />
         <Tab.Screen
           name="Button"
-          component={ActiveOrders}
+          component={OrdersTab}
           options={{
             tabBarButton: () => (
               <TouchableOpacity

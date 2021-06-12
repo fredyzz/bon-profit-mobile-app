@@ -24,20 +24,23 @@ interface StateProperties {
   activeOrders: Array<Order>;
 }
 
-export const ActiveOrders = () => {
+export const OrdersTab = () => {
   const navigation: any = useNavigation();
   const {name: routeName} = useRoute();
-  console.log(routeName);
   const {
     cartState: {cart},
   } = useContext(CartContext);
   const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
-  const [activeOrders, setActiveOrders] = useState<Array<Order>>([]);
+  const [filteredOrders, setFilteredOrders] = useState<Array<Order>>([]);
 
-  const updateActiveOrders = (orders: Array<Order>): void => {
-    const filteredOrders = fiterOrdersByDeliveredState(orders, false);
-    setActiveOrders(filteredOrders);
+  const updateFilteredOrders = (orders: Array<Order>): void => {
+    setFilteredOrders(
+      fiterOrdersByDeliveredState(
+        orders,
+        routeName === 'Active' ? false : true,
+      ),
+    );
   };
 
   const getOrders = async (callback: any) => {
@@ -54,12 +57,12 @@ export const ActiveOrders = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      getOrders(() => updateActiveOrders(ordersState.orders));
+      getOrders(() => updateFilteredOrders(ordersState.orders));
     }, [ordersState.orders.length]),
   );
 
   useEffect(() => {
-    getOrders(() => updateActiveOrders(ordersState.orders));
+    getOrders(() => updateFilteredOrders(ordersState.orders));
   }, [ordersState.orders.length]);
 
   useEffect(() => {
@@ -76,17 +79,17 @@ export const ActiveOrders = () => {
     <View style={globalStyles.frameContainer}>
       <View style={globalStyles.frame}>
         <View style={styles.container}>
-          <Text style={globalStyles.title}>Active orders</Text>
-          {activeOrders.length ? (
+          <Text style={globalStyles.title}>{`${routeName} orders`}</Text>
+          {filteredOrders.length ? (
             <FlatList
-              data={activeOrders}
+              data={filteredOrders}
               renderItem={renderItem}
               keyExtractor={item => item._id}
             />
           ) : (
             <View style={[styles.noOrderIconContainer]}>
               <Icon name="sad-outline" style={styles.noOrderIcon} />
-              <Text>No active orders yet</Text>
+              <Text>{`No ${routeName.toLowerCase()} orders yet`}</Text>
             </View>
           )}
         </View>
