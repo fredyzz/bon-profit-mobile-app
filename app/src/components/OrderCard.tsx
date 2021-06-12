@@ -36,10 +36,15 @@ export const OrderCard = ({order}: Props) => {
         <Text style={styles.title}>
           Ordered: {formatedDate} - {formatedTime}
         </Text>
-        <Text style={styles.title}>
-          Waiting estimated time: {getLongestTime(order.dishes)}
+        {!order.isDelivered && (
+          <Text style={styles.title}>
+            Waiting estimated time: {getLongestTime(order.dishes)}
+          </Text>
+        )}
+
+        <Text style={styles.stateText}>
+          {order.isDelivered ? 'Delivered' : 'Waiting for delivery'}
         </Text>
-        <Text style={styles.stateText}>Waiting for delivery</Text>
       </View>
       <View />
     </View>

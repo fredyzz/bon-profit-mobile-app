@@ -13,7 +13,6 @@ import {useFocusEffect} from '@react-navigation/native';
 import {Order} from '../../store/context/OrdersContext/interfaces';
 import {fiterOrdersByDeliveredState} from '../../helpers/order.helper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useRoute} from '@react-navigation/native';
 
 interface RouteParams {
   restaurantId: string;
@@ -24,20 +23,18 @@ interface StateProperties {
   activeOrders: Array<Order>;
 }
 
-export const ActiveOrders = () => {
+export const FinishedOrders = () => {
   const navigation: any = useNavigation();
-  const {name: routeName} = useRoute();
-  console.log(routeName);
   const {
     cartState: {cart},
   } = useContext(CartContext);
   const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
-  const [activeOrders, setActiveOrders] = useState<Array<Order>>([]);
+  const [deliveredOrders, setDeliveredOrders] = useState<Array<Order>>([]);
 
   const updateActiveOrders = (orders: Array<Order>): void => {
-    const filteredOrders = fiterOrdersByDeliveredState(orders, false);
-    setActiveOrders(filteredOrders);
+    const filteredOrders = fiterOrdersByDeliveredState(orders, true);
+    setDeliveredOrders(filteredOrders);
   };
 
   const getOrders = async (callback: any) => {
@@ -45,7 +42,6 @@ export const ActiveOrders = () => {
     loadOrders(orders);
     callback();
   };
-
   useEffect(() => {
     if (!authState.isLoggedIn) {
       navigation.navigate('LoginScren');
@@ -76,17 +72,17 @@ export const ActiveOrders = () => {
     <View style={globalStyles.frameContainer}>
       <View style={globalStyles.frame}>
         <View style={styles.container}>
-          <Text style={globalStyles.title}>Active orders</Text>
-          {activeOrders.length ? (
+          <Text style={globalStyles.title}>Delivered orders</Text>
+          {deliveredOrders.length ? (
             <FlatList
-              data={activeOrders}
+              data={deliveredOrders}
               renderItem={renderItem}
               keyExtractor={item => item._id}
             />
           ) : (
             <View style={[styles.noOrderIconContainer]}>
               <Icon name="sad-outline" style={styles.noOrderIcon} />
-              <Text>No active orders yet</Text>
+              <Text>No delivered orders yet</Text>
             </View>
           )}
         </View>

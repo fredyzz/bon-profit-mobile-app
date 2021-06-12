@@ -3,7 +3,6 @@ import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {globalStyles} from '../../theme/appTheme';
 import {Colors} from '../../theme/colors';
 import {CartContext} from '../../store/context/CartContext';
 import {AuthContext} from '../../store/context/AuthContext';
@@ -12,6 +11,7 @@ import {OrdersContext} from '../../store/context/OrdersContext';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {ActiveOrders} from './ActiveOrders';
+import {FinishedOrders} from './FinishedOrders';
 import {useFocusEffect} from '@react-navigation/native';
 
 interface RouteParams {
@@ -29,7 +29,7 @@ export const OrdersScreen = () => {
 
   useEffect(() => {
     if (!authState.isLoggedIn) {
-      navigation.navigate('LoginScren');
+      navigation.navigate('LoginScreen');
     }
   }, []);
 
@@ -46,37 +46,12 @@ export const OrdersScreen = () => {
   useEffect(() => {
     navigation.setOptions({
       navigationOptions: {
-        gesturesEnabled: false,
+        gesturesEnabled: true,
       },
-      headerLeft: () => (
-        <TouchableOpacity
-          style={globalStyles.btnMenu}
-          onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back-outline" style={globalStyles.icon} />
-        </TouchableOpacity>
-      ),
-      headerTitle: () => (
-        <View style={styles.headerTitle}>
-          <Text style={[globalStyles.title, styles.title]}>Cart</Text>
-        </View>
-      ),
-      headerRight: () => (
-        <TouchableOpacity
-          style={[globalStyles.btnMenu, globalStyles.btnMenuRight]}
-          onPress={() => navigation.goBack()}>
-          <Icon name="checkmark-outline" style={globalStyles.icon} />
-        </TouchableOpacity>
-      ),
     });
   }, [navigation, cart]);
 
   const Tab = createBottomTabNavigator();
-
-  const FinishedOrders = () => (
-    <View style={styles.totalContainer}>
-      <Text style={styles.totalText}>Finished orders</Text>
-    </View>
-  );
 
   return ordersState.orders ? (
     <NavigationContainer independent={true}>
@@ -87,11 +62,10 @@ export const OrdersScreen = () => {
 
             if (route.name === 'Active') {
               iconName = 'hourglass-outline';
-            } else if (route.name === 'Finished') {
+            } else if (route.name === 'Delivered') {
               iconName = 'checkbox-outline';
             }
 
-            // You can return any component that you like here!
             return (
               <Icon
                 name={iconName ? iconName : 'ellipsis-horizontal'}
@@ -106,7 +80,7 @@ export const OrdersScreen = () => {
           inactiveTintColor: Colors.dark,
         }}>
         <Tab.Screen name="Active" component={ActiveOrders} />
-        <Tab.Screen name="Finished" component={FinishedOrders} />
+        <Tab.Screen name="Delivered" component={FinishedOrders} />
         <Tab.Screen
           name="Button"
           component={ActiveOrders}
