@@ -4,6 +4,7 @@ import {Colors} from '../theme/colors';
 import {Order} from '../store/context/OrdersContext/interfaces';
 import {Dish} from '../store/context/RestaurantContext/interfaces';
 import {getLongestTime} from '../helpers/order.helper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
   order: Order;
@@ -15,13 +16,21 @@ export const OrderCard = ({order}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.dishesImagesContainer}>
-        {order.dishes.slice(0, 5).map((dish: Dish, index: number) => (
+        {order.dishes.slice(0, 4).map((dish: Dish, index: number) => (
           <Image
             source={{uri: dish.imagesHref[0]}}
             style={styles.dishImage}
             key={index}
           />
         ))}
+        {order.dishes.length > 5 && (
+          <View style={[styles.dishImage, styles.dishPlaceholder]}>
+            <Icon
+              name="ellipsis-horizontal"
+              style={styles.dishPlaceholderIcon}
+            />
+          </View>
+        )}
       </View>
       <View style={styles.dishData}>
         <Text style={styles.title}>
@@ -29,6 +38,9 @@ export const OrderCard = ({order}: Props) => {
         </Text>
         <Text style={styles.title}>
           Waiting estimated time: {getLongestTime(order.dishes)}
+        </Text>
+        <Text style={styles.title}>
+          isDelivered: {order.isDelivered.toString()}
         </Text>
       </View>
       <View />
@@ -40,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 300,
-    height: 400,
+    minHeight: 200,
     margin: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -108,6 +120,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 2,
     borderColor: Colors.primary,
+    backgroundColor: Colors.white,
     marginRight: -10,
+  },
+  dishPlaceholder: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dishPlaceholderIcon: {
+    fontSize: 26,
   },
 });

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {OrderCard} from '../../components/OrderCard';
@@ -11,10 +11,16 @@ import {AuthContext} from '../../store/context/AuthContext';
 import {getAllOrders} from '../../services/orders';
 import {OrdersContext} from '../../store/context/OrdersContext';
 import {useFocusEffect} from '@react-navigation/native';
+import {Order} from '../../store/context/OrdersContext/interfaces';
+import {fiterOrdersByDeliveredState} from '../../helpers/order.helper';
 
 interface RouteParams {
   restaurantId: string;
   tableId: string;
+}
+
+interface StateProperties {
+  activeOrders: Array<Order>;
 }
 
 export const ActiveOrders = () => {
@@ -24,6 +30,12 @@ export const ActiveOrders = () => {
   } = useContext(CartContext);
   const {authState} = useContext(AuthContext);
   const {ordersState, loadOrders} = useContext(OrdersContext);
+  const [activeOrders, setActiveOrders] = useState<Array<Order>>([]);
+
+  const updateActiveOrders = (orders: Array<Order>): void => {
+    const filteredOrders = fiterOrdersByDeliveredState(orders, false);
+    setActiveOrders(filteredOrders);
+  };
 
   useEffect(() => {
     if (!authState.isLoggedIn) {
@@ -33,13 +45,18 @@ export const ActiveOrders = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      const getOrders = async () => {
+      const getOrders = async (callback: any) => {
         const orders = await getAllOrders(authState.token);
         loadOrders(orders);
+        callback();
       };
-      getOrders();
+      getOrders(() => updateActiveOrders(ordersState.orders));
     }, []),
   );
+
+  useEffect(() => {
+    updateActiveOrders(ordersState.orders);
+  }, [ordersState.orders.length]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -76,7 +93,7 @@ export const ActiveOrders = () => {
         <View style={styles.container}>
           <Text style={globalStyles.title}>Active orders</Text>
           <FlatList
-            data={ordersState.orders}
+            data={activeOrders}
             renderItem={renderItem}
             keyExtractor={item => item._id}
           />
