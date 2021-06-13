@@ -86,6 +86,7 @@ export const CartScreen = () => {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={[globalStyles.bigButton, styles.btnLogin]}
+              testID="btnConfirm-Cart"
               onPress={() => sendOrder(cart)}>
               <Text style={globalStyles.bigButtonText}>Confirm</Text>
             </TouchableOpacity>

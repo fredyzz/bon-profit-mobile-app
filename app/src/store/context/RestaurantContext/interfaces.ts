@@ -1,3 +1,5 @@
+import {Order} from '../OrdersContext/interfaces';
+
 export interface Dish {
   _id: string;
   title: string;
