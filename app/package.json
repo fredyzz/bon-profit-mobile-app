@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest --watchAll --collect-coverage",
+    "test": "jest --watchAll --collect-coverage --detectOpenHandles",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
@@ -54,11 +54,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "<rootDir>/jest.setup.js"
-    ],
+    "setupFiles": ["./__mocks__/jest/setup.js"],
     "coveragePathIgnorePatterns": [
       "context"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native)/)"
     ],
     "moduleFileExtensions": [
       "ts",
