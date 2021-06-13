@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1623577126108" clover="3.2.0">
-  <project timestamp="1623577126108" name="All files">
-    <metrics statements="148" coveredstatements="100" conditionals="45" coveredconditionals="29" methods="42" coveredmethods="20" elements="235" coveredelements="149" complexity="0" loc="148" ncloc="148" packages="10" files="14" classes="14"/>
+<coverage generated="1623577513423" clover="3.2.0">
+  <project timestamp="1623577513423" name="All files">
+    <metrics statements="148" coveredstatements="105" conditionals="45" coveredconditionals="29" methods="42" coveredmethods="21" elements="235" coveredelements="155" complexity="0" loc="148" ncloc="148" packages="10" files="14" classes="14"/>
     <package name="app">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name=".env.js" path="/Users/fredyzz/Documents/Projects/bon-profit/app/.env.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="6" type="stmt"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="19" count="6" type="stmt"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
       </file>
     </package>
     <package name="app.src.components">
@@ -173,15 +173,15 @@
       </file>
     </package>
     <package name="app.src.services">
-      <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="cart.ts" path="/Users/fredyzz/Documents/Projects/bon-profit/app/src/services/cart.ts">
-        <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
     </package>
     <package name="app.src.services.auth">
