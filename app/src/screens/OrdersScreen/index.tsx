@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {headerScreen} from '../../theme/headerScreen';
 import {Colors} from '../../theme/colors';
 import {CartContext} from '../../store/context/CartContext';
 import {getAllOrders} from '../../services/orders';
@@ -80,10 +81,10 @@ export const OrdersScreen = () => {
           options={{
             tabBarButton: () => (
               <TouchableOpacity
-                style={styles.btnTabContainer}
+                style={headerScreen.btnTabContainer}
                 onPress={() => navigation.navigate('StackNavigator')}>
-                <View style={styles.btnTab}>
-                  <Text style={styles.btnTabText}>New Order</Text>
+                <View style={headerScreen.btnTab}>
+                  <Text style={headerScreen.btnTabText}>New Order</Text>
                 </View>
               </TouchableOpacity>
             ),
@@ -95,77 +96,3 @@ export const OrdersScreen = () => {
     <Text>No products</Text>
   );
 };
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    alignItems: 'center',
-    marginTop: 120,
-  },
-  container: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  logo: {
-    width: 140,
-    height: 140,
-    borderRadius: 100,
-    resizeMode: 'cover',
-    borderWidth: 2,
-    borderColor: Colors.white,
-  },
-  title: {
-    color: Colors.resalt,
-    marginTop: -0,
-    fontSize: 32,
-  },
-  btnCartTextContainer: {
-    borderRadius: 100,
-    width: 24,
-    height: 24,
-    backgroundColor: Colors.dark,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -20,
-    marginBottom: -4,
-    marginLeft: 15,
-  },
-  btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 50,
-  },
-  btnLogin: {backgroundColor: Colors.primary},
-  btnCartText: {
-    color: Colors.primary,
-    fontSize: 12,
-  },
-  totalContainer: {
-    height: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  totalText: {
-    fontSize: 26,
-    color: Colors.dark,
-  },
-  btnTabContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 5,
-  },
-  btnTab: {
-    flex: 1,
-    width: '80%',
-    padding: 2,
-    marginTop: 3,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.primary,
-  },
-  btnTabText: {
-    color: Colors.white,
-  },
-});

@@ -13,7 +13,7 @@ import {fiterOrdersByDeliveredState} from '../../helpers/order.helper';
 import {getAllOrders} from '../../services/orders';
 import {OrderCard} from '../../components/OrderCard';
 import {globalStyles} from '../../theme/appTheme';
-import {Colors} from '../../theme/colors';
+import {headerScreen} from '../../theme/headerScreen';
 
 interface RouteParams {
   restaurantId: string;
@@ -72,7 +72,7 @@ export const OrdersTab = () => {
   return ordersState.orders ? (
     <View style={globalStyles.frameContainer}>
       <View style={globalStyles.frame}>
-        <View style={styles.container}>
+        <View style={headerScreen.container}>
           <Text style={globalStyles.title}>{`${routeName} orders`}</Text>
           {filteredOrders.length ? (
             <FlatList
@@ -95,51 +95,6 @@ export const OrdersTab = () => {
 };
 
 const styles = StyleSheet.create({
-  headerTitle: {
-    alignItems: 'center',
-    marginTop: 120,
-  },
-  container: {
-    flex: 1,
-    width: '100%',
-    paddingTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 140,
-    height: 140,
-    borderRadius: 100,
-    resizeMode: 'cover',
-    borderWidth: 2,
-    borderColor: Colors.white,
-  },
-  title: {
-    color: Colors.resalt,
-    marginTop: -0,
-    fontSize: 32,
-  },
-  btnCartTextContainer: {
-    borderRadius: 100,
-    width: 24,
-    height: 24,
-    backgroundColor: Colors.dark,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -20,
-    marginBottom: -4,
-    marginLeft: 15,
-  },
-  btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 50,
-  },
-  btnLogin: {backgroundColor: Colors.primary},
-  btnCartText: {
-    color: Colors.primary,
-    fontSize: 12,
-  },
   noOrderIconContainer: {
     flex: 1,
     justifyContent: 'center',

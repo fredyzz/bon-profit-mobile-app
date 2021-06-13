@@ -4,6 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {DishGroup} from '../store/context/RestaurantContext/interfaces';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {globalStyles} from '../theme/appTheme';
+import {cardComponent} from '../theme/cardComponent';
 import {Colors} from '../theme/colors';
 
 interface Props {
@@ -24,19 +25,19 @@ export const CartItemCard = ({dishGroup, add, remove}: Props) => {
       </View>
       <View style={styles.actionsContainer}>
         <TouchableOpacity
-          style={[styles.actionButton, styles.actionButtonLeft]}
+          style={[cardComponent.actionButton, cardComponent.actionButtonLeft]}
           onPress={remove}>
           <Icon
             name="remove-outline"
-            style={[globalStyles.icon, styles.actionButtonText]}
+            style={[globalStyles.icon, cardComponent.actionButtonText]}
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.actionButton, styles.actionButtonRight]}
+          style={[cardComponent.actionButton, cardComponent.actionButtonRight]}
           onPress={add}>
           <Icon
             name="add-outline"
-            style={[globalStyles.icon, styles.actionButtonText]}
+            style={[globalStyles.icon, cardComponent.actionButtonText]}
           />
         </TouchableOpacity>
       </View>
@@ -81,32 +82,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 2,
   },
-  actionButton: {
-    width: 50,
-    height: 50,
-    marginRight: 0,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.primary,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-
-    shadowOpacity: 0.2,
-    shadowRadius: 3.84,
-    elevation: 4,
-  },
-  actionButtonLeft: {
-    borderTopLeftRadius: 100,
-    borderBottomLeftRadius: 100,
-  },
-  actionButtonRight: {
-    marginLeft: 10,
-    borderTopRightRadius: 100,
-    borderBottomRightRadius: 100,
-  },
-  actionButtonText: {color: Colors.white},
 });
