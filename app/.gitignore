@@ -1,5 +1,4 @@
 .env.js
-__test__/
 coverage/
 src/.scannerwork/
 src/sonar-project.properties
