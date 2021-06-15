@@ -1,7 +1,5 @@
-import React, {useReducer} from 'react';
-import {createContext} from 'react';
-import {AuthState} from './interfaces';
-import {AuthContextProps} from './interfaces';
+import React, {useReducer, createContext} from 'react';
+import {AuthState, AuthContextProps} from './interfaces';
 import {authReducer} from './reducer';
 export const authInitialState: AuthState = {
   isLoggedIn: false,

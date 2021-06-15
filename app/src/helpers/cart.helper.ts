@@ -1,5 +1,4 @@
-import {Dish} from '../store/context/RestaurantContext/interfaces';
-import {DishGroup} from '../store/context/RestaurantContext/interfaces';
+import {Dish, DishGroup} from '../store/context/RestaurantContext/interfaces';
 
 export const groupDishesById = (dishList: Array<Dish>): Array<DishGroup> => {
   const reducer = (

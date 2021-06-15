@@ -1,7 +1,5 @@
-import React, {useReducer} from 'react';
-import {createContext} from 'react';
-import {CartState} from './interfaces';
-import {CartContextProps} from './interfaces';
+import React, {useReducer, createContext} from 'react';
+import {CartState, CartContextProps} from './interfaces';
 import {Dish} from '../RestaurantContext/interfaces';
 import {cartReducer} from './reducer';
 export const CartInitialState: CartState = {

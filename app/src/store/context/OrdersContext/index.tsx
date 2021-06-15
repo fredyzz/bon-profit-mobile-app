@@ -1,5 +1,4 @@
-import React, {useReducer} from 'react';
-import {createContext} from 'react';
+import React, {useReducer, createContext} from 'react';
 import {OrdersContextProps, Order, OrdersState} from './interfaces';
 import {Ordersreducer} from './reducer';
 export const ordersInitialState: OrdersState = {

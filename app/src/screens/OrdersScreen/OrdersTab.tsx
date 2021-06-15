@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useContext, useState} from 'react';
-import {useFocusEffect} from '@react-navigation/native';
-import {useRoute} from '@react-navigation/native';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {CartContext} from '../../store/context/CartContext';

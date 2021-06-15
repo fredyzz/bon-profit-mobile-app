@@ -9,9 +9,8 @@ import {CartContext} from '../../store/context/CartContext';
 import {getAllOrders} from '../../services/orders';
 import {OrdersContext} from '../../store/context/OrdersContext';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {OrdersTab} from './OrdersTab';
-import {useFocusEffect} from '@react-navigation/native';
 import {useAuth} from '../../hooks/UseAuth';
 
 interface RouteParams {

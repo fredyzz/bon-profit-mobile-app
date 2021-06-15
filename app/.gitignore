@@ -2,3 +2,4 @@
 coverage/
 src/.scannerwork/
 src/sonar-project.properties
+.DS_Store

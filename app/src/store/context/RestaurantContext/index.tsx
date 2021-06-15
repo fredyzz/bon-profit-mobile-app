@@ -1,7 +1,9 @@
-import React, {useReducer} from 'react';
-import {createContext} from 'react';
-import {RestaurantState} from './interfaces';
-import {RestaurantContextProps, Restaurant} from './interfaces';
+import React, {useReducer, createContext} from 'react';
+import {
+  RestaurantContextProps,
+  Restaurant,
+  RestaurantState,
+} from './interfaces';
 import {restaurantReducer} from './reducer';
 export const restaurantInitialState: RestaurantState = {
   restaurant: undefined,
