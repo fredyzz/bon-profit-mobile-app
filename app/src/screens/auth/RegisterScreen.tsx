@@ -1,5 +1,4 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
-// import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useContext, useState} from 'react';
 import {AuthContext} from '../../store/context/AuthContext';
 import {
@@ -20,7 +19,6 @@ import {Colors} from '../../theme/colors';
 import {validateRegisterForm} from '../../helpers/register.validator';
 import {register} from '../../services/auth/register';
 
-// interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 export const RegisterScreen = ({navigation}: Props) => {
   const [name, setName] = useState('');
